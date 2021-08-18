@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		A11FB51E26C9D06000A2E55E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FB51D26C9D06000A2E55E /* AppDelegate.swift */; };
 		A11FB52026C9D06000A2E55E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FB51F26C9D06000A2E55E /* SceneDelegate.swift */; };
-		A11FB52226C9D06000A2E55E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FB52126C9D06000A2E55E /* ViewController.swift */; };
 		A11FB52526C9D06000A2E55E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11FB52326C9D06000A2E55E /* Main.storyboard */; };
 		A11FB52726C9D06100A2E55E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A11FB52626C9D06100A2E55E /* Assets.xcassets */; };
 		A11FB52A26C9D06100A2E55E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11FB52826C9D06100A2E55E /* LaunchScreen.storyboard */; };
+		A11FB53D26C9D22100A2E55E /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FB53C26C9D22100A2E55E /* MainTabBarController.swift */; };
+		A11FB54126C9D4B800A2E55E /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FB54026C9D4B800A2E55E /* FeedController.swift */; };
+		A11FB54426C9D52800A2E55E /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FB54326C9D52800A2E55E /* ExploreController.swift */; };
+		A11FB54726C9D54500A2E55E /* NotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FB54626C9D54500A2E55E /* NotificationsController.swift */; };
+		A11FB54A26C9D56800A2E55E /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FB54926C9D56800A2E55E /* ConversationsController.swift */; };
+		A189446926CD84360033ACA5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189446826CD84360033ACA5 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A11FB51A26C9D06000A2E55E /* TwitterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11FB51D26C9D06000A2E55E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A11FB51F26C9D06000A2E55E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A11FB52126C9D06000A2E55E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A11FB52426C9D06000A2E55E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A11FB52626C9D06100A2E55E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A11FB52926C9D06100A2E55E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A11FB52B26C9D06100A2E55E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A11FB53C26C9D22100A2E55E /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		A11FB54026C9D4B800A2E55E /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
+		A11FB54326C9D52800A2E55E /* ExploreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreController.swift; sourceTree = "<group>"; };
+		A11FB54626C9D54500A2E55E /* NotificationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsController.swift; sourceTree = "<group>"; };
+		A11FB54926C9D56800A2E55E /* ConversationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationsController.swift; sourceTree = "<group>"; };
+		A189446826CD84360033ACA5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,68 @@
 		A11FB51C26C9D06000A2E55E /* TwitterApp */ = {
 			isa = PBXGroup;
 			children = (
+				A11FB53726C9D0C200A2E55E /* Model */,
+				A11FB53626C9D0BF00A2E55E /* View */,
+				A11FB53526C9D0AB00A2E55E /* ViewModel */,
+				A11FB53426C9D0A700A2E55E /* Controller */,
+				A11FB53226C9D09700A2E55E /* API */,
+				A11FB53826C9D0F800A2E55E /* Utils */,
 				A11FB51D26C9D06000A2E55E /* AppDelegate.swift */,
 				A11FB51F26C9D06000A2E55E /* SceneDelegate.swift */,
-				A11FB52126C9D06000A2E55E /* ViewController.swift */,
 				A11FB52326C9D06000A2E55E /* Main.storyboard */,
 				A11FB52626C9D06100A2E55E /* Assets.xcassets */,
 				A11FB52826C9D06100A2E55E /* LaunchScreen.storyboard */,
 				A11FB52B26C9D06100A2E55E /* Info.plist */,
 			);
 			path = TwitterApp;
+			sourceTree = "<group>";
+		};
+		A11FB53226C9D09700A2E55E /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		A11FB53426C9D0A700A2E55E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A11FB53C26C9D22100A2E55E /* MainTabBarController.swift */,
+				A11FB54026C9D4B800A2E55E /* FeedController.swift */,
+				A11FB54326C9D52800A2E55E /* ExploreController.swift */,
+				A11FB54626C9D54500A2E55E /* NotificationsController.swift */,
+				A11FB54926C9D56800A2E55E /* ConversationsController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A11FB53526C9D0AB00A2E55E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A11FB53626C9D0BF00A2E55E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A11FB53726C9D0C200A2E55E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A11FB53826C9D0F800A2E55E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A189446826CD84360033ACA5 /* Extensions.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +200,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A11FB52226C9D06000A2E55E /* ViewController.swift in Sources */,
+				A11FB54726C9D54500A2E55E /* NotificationsController.swift in Sources */,
+				A11FB54A26C9D56800A2E55E /* ConversationsController.swift in Sources */,
 				A11FB51E26C9D06000A2E55E /* AppDelegate.swift in Sources */,
+				A189446926CD84360033ACA5 /* Extensions.swift in Sources */,
+				A11FB54426C9D52800A2E55E /* ExploreController.swift in Sources */,
+				A11FB53D26C9D22100A2E55E /* MainTabBarController.swift in Sources */,
 				A11FB52026C9D06000A2E55E /* SceneDelegate.swift in Sources */,
+				A11FB54126C9D4B800A2E55E /* FeedController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +284,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -271,7 +339,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -289,6 +357,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CHVCWFP3P;
 				INFOPLIST_FILE = TwitterApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -308,6 +377,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8CHVCWFP3P;
 				INFOPLIST_FILE = TwitterApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
