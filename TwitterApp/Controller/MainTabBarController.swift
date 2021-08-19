@@ -5,6 +5,7 @@
 //  Created by andy on 16.08.2021.
 //
 
+import Firebase
 import UIKit
 
 final class MainTabBarController: UITabBarController {
@@ -24,8 +25,35 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        confitureViewControllers()
-        configureUI()
+//        logout()
+        authUserAndConfigureUI()
+    }
+
+    // MARK: - API
+
+    func authUserAndConfigureUI() {
+        if Auth.auth().currentUser == nil {
+            DispatchQueue.main.async {
+                let nav = UINavigationController(rootViewController: LoginController())
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true)
+            }
+
+            print("DEBUG: User is NOT logged in")
+        } else {
+            confitureViewControllers()
+            configureUI()
+
+            print("DEBUG: User is logged in")
+        }
+    }
+
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
+        }
     }
 
     // MARK: - Selectors

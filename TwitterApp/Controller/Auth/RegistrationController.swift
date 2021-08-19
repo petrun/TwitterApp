@@ -5,6 +5,7 @@
 //  Created by andy on 18.08.2021.
 //
 
+import Firebase
 import UIKit
 
 class RegistrationController: UIViewController {
@@ -17,6 +18,8 @@ class RegistrationController: UIViewController {
 
         return imagePicker
     }()
+
+    private var profileImage: UIImage?
 
     private let addPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -104,7 +107,48 @@ class RegistrationController: UIViewController {
     }
 
     @objc func handleSignUp() {
-        print("handleSignUp ...")
+        guard let profileImage = profileImage else {
+            print("DEBUG: Please select a profile image...")
+            return
+        }
+
+        guard
+            let email = emailTextField.text,
+            let password = passwordTextField.text,
+            let fullname = fullnameTextField.text,
+            let username = usernameTextField.text,
+            let imageData = profileImage.jpegData(compressionQuality: 0.3)
+        else {
+            return
+        }
+
+        AuthService.shared.registerUser(credentials: AuthCredentials(
+            email: email,
+            password: password,
+            fullname: fullname,
+            username: username,
+            imageData: imageData
+        )) { (error, ref) in
+            print("User register complition ...")
+
+            if let error = error {
+                print("Auth error: \(error.localizedDescription)")
+                return
+            }
+
+            guard
+                let tab = UIApplication.shared.windows
+                    .first(where: {$0.isKeyWindow})?.rootViewController as? MainTabBarController
+            else {
+                return
+            }
+
+            tab.authUserAndConfigureUI()
+
+            self.dismiss(animated: true)
+        }
+
+        print("Email = \(email) Password = \(password)")
     }
 
     @objc func handleAddProfilePhoto() {
@@ -161,6 +205,8 @@ class RegistrationController: UIViewController {
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
+
+        profileImage = image
 
         addPhotoButton.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
 

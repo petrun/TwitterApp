@@ -68,7 +68,27 @@ class LoginController: UIViewController {
     // MARK: - Selectors
 
     @objc func handleLogin() {
-        print("handleLogin here...")
+        guard let email = emailTextField.text, let password = passwordTextField.text else {
+            return
+        }
+
+        AuthService.shared.login(email: email, password: password) { (result, error) in
+            if let error = error {
+                print("Auth error: \(error.localizedDescription)")
+                return
+            }
+
+            guard
+                let tab = UIApplication.shared.windows
+                    .first(where: {$0.isKeyWindow})?.rootViewController as? MainTabBarController
+            else {
+                return
+            }
+
+            tab.authUserAndConfigureUI()
+
+            self.dismiss(animated: true)
+        }
     }
 
     @objc func handleShowSignUp() {
