@@ -8,83 +8,104 @@
 import UIKit
 
 extension UIView {
-    enum Size {
-        case top(NSLayoutYAxisAnchor, CGFloat = 0)
-        case left(NSLayoutXAxisAnchor, CGFloat = 0)
-        case bottom(NSLayoutYAxisAnchor, CGFloat = 0)
-        case right(NSLayoutXAxisAnchor, CGFloat = 0)
-        case width(CGFloat)
-        case height(CGFloat)
+    @discardableResult func top(to: NSLayoutYAxisAnchor, _ paddingTop: CGFloat = 0) -> Self {
+        activateConstraints(topAnchor.constraint(equalTo: to, constant: paddingTop))
     }
 
-    func anchor(_ sizes: Size...) {
-        translatesAutoresizingMaskIntoConstraints = false
-
-        var constraints = [NSLayoutConstraint]()
-
-        for size in sizes {
-            switch size {
-            case .top(let top, let paddingTop):
-                constraints.append(topAnchor.constraint(equalTo: top, constant: paddingTop))
-            case .left(let left, let paddingLeft):
-                constraints.append(leftAnchor.constraint(equalTo: left, constant: paddingLeft))
-            case .bottom(let bottom, let paddingBottom):
-                constraints.append(bottomAnchor.constraint(equalTo: bottom, constant: -paddingBottom))
-            case .right(let right, let paddingRight):
-                constraints.append(rightAnchor.constraint(equalTo: right, constant: -paddingRight))
-            case .width(let width):
-                constraints.append(widthAnchor.constraint(equalToConstant: width))
-            case .height(let height):
-                constraints.append(heightAnchor.constraint(equalToConstant: height))
-            }
-        }
-
-        NSLayoutConstraint.activate(constraints)
+    @discardableResult func left(to: NSLayoutXAxisAnchor, _ paddingLeft: CGFloat = 0) -> Self {
+        activateConstraints(leftAnchor.constraint(equalTo: to, constant: paddingLeft))
     }
 
-    func center(inView view: UIView, yConstant: CGFloat? = 0) {
-        translatesAutoresizingMaskIntoConstraints = false
-        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: yConstant!).isActive = true
+    @discardableResult func bottom(to: NSLayoutYAxisAnchor, _ paddingBottom: CGFloat = 0) -> Self {
+        activateConstraints(bottomAnchor.constraint(equalTo: to, constant: -paddingBottom))
     }
 
-    func centerX(inView view: UIView, topAnchor: NSLayoutYAxisAnchor? = nil, paddingTop: CGFloat? = 0) {
-        translatesAutoresizingMaskIntoConstraints = false
-        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    @discardableResult func right(to: NSLayoutXAxisAnchor, _ paddingRight: CGFloat = 0) -> Self {
+        activateConstraints(rightAnchor.constraint(equalTo: to, constant: -paddingRight))
+    }
+
+    @discardableResult func width(_ width: CGFloat) -> Self {
+        activateConstraints(widthAnchor.constraint(equalToConstant: width))
+    }
+
+    @discardableResult func height(_ height: CGFloat) -> Self {
+        activateConstraints(heightAnchor.constraint(equalToConstant: height))
+    }
+
+    @discardableResult func size(width: CGFloat, height: CGFloat) -> Self {
+        activateConstraints(
+            widthAnchor.constraint(equalToConstant: width),
+            heightAnchor.constraint(equalToConstant: height)
+        )
+    }
+
+    @discardableResult func fill(view: UIView) -> Self {
+        activateConstraints(
+            topAnchor.constraint(equalTo: view.topAnchor),
+            leftAnchor.constraint(equalTo: view.leftAnchor),
+            bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            rightAnchor.constraint(equalTo: view.rightAnchor)
+        )
+    }
+
+    @discardableResult func center(inView view: UIView, yConstant: CGFloat = 0) -> Self {
+        activateConstraints(
+            centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: yConstant)
+        )
+    }
+
+    @discardableResult func centerX(
+        in view: UIView,
+        topAnchor: NSLayoutYAxisAnchor? = nil,
+        paddingTop: CGFloat = 0
+    ) -> Self {
+        var constraints: [NSLayoutConstraint] = [
+            centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ]
 
         if let topAnchor = topAnchor {
-            self.topAnchor.constraint(equalTo: topAnchor, constant: paddingTop!).isActive = true
+            constraints.append(
+                self.topAnchor.constraint(equalTo: topAnchor, constant: paddingTop)
+            )
         }
+
+        return activateConstraints(constraints)
     }
 
-    func centerY(inView view: UIView, leftAnchor: NSLayoutXAxisAnchor? = nil, paddingLeft: CGFloat? = nil, constant: CGFloat? = 0) {
+    @discardableResult func centerY(
+        inView view: UIView,
+        constant: CGFloat = 0,
+        leftAnchor: NSLayoutXAxisAnchor? = nil,
+        paddingLeft: CGFloat = 0
+    ) -> Self {
+        var constraints: [NSLayoutConstraint] = [
+            centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant)
+        ]
+
+        if let leftAnchor = leftAnchor {
+            constraints.append(
+                self.leftAnchor.constraint(equalTo: leftAnchor, constant: paddingLeft)
+            )
+        }
+
+        return activateConstraints(constraints)
+    }
+
+    @discardableResult private func activateConstraints(_ constraints: NSLayoutConstraint...) -> Self {
         translatesAutoresizingMaskIntoConstraints = false
 
-        centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant!).isActive = true
+        NSLayoutConstraint.activate(constraints)
 
-        if let leftAnchor = leftAnchor, let padding = paddingLeft {
-            self.leftAnchor.constraint(equalTo: leftAnchor, constant: padding).isActive = true
-        }
+        return self
     }
 
-    func setDimensions(width: CGFloat, height: CGFloat) {
-        anchor(.width(width), .height(height))
+    @discardableResult private func activateConstraints(_ constraints: [NSLayoutConstraint]) -> Self {
+        translatesAutoresizingMaskIntoConstraints = false
 
-//        translatesAutoresizingMaskIntoConstraints = false
-//        widthAnchor.constraint(equalToConstant: width).isActive = true
-//        heightAnchor.constraint(equalToConstant: height).isActive = true
-    }
+        NSLayoutConstraint.activate(constraints)
 
-    func addConstraintsToFillView(_ view: UIView) {
-        anchor(
-            .top(view.topAnchor),
-            .left(view.leftAnchor),
-            .bottom(view.bottomAnchor),
-            .right(view.rightAnchor)
-        )
-//        translatesAutoresizingMaskIntoConstraints = false
-//        anchor(top: view.topAnchor, left: view.leftAnchor,
-//               bottom: view.bottomAnchor, right: view.rightAnchor)
+        return self
     }
 }
 

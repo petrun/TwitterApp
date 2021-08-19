@@ -38,12 +38,11 @@ final class MainTabBarController: UITabBarController {
 
     private func configureUI() {
         view.addSubview(actionButton)
-        actionButton.anchor(
-            .height(56),
-            .width(56),
-            .bottom(tabBar.topAnchor, 16),
-            .right(view.rightAnchor, 16)
-        )
+        actionButton
+            .size(width: 56, height: 56)
+            .bottom(to: tabBar.topAnchor, 16)
+            .right(to: view.rightAnchor, 16)
+
         actionButton.layer.cornerRadius = 28
     }
 
