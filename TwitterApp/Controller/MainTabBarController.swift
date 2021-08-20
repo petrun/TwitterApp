@@ -11,6 +11,14 @@ import UIKit
 final class MainTabBarController: UITabBarController {
     // MARK: - Properties
 
+    var user: User? {
+        didSet {
+            guard let nav = viewControllers?.first as? UINavigationController else { return }
+            guard let feed = nav.viewControllers.first as? FeedController else { return }
+            feed.user = user
+        }
+    }
+
     let actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
@@ -43,12 +51,17 @@ final class MainTabBarController: UITabBarController {
         } else {
             confitureViewControllers()
             configureUI()
+            fetchUser()
 
             print("DEBUG: User is logged in")
         }
     }
 
-    func logout() {
+    private func fetchUser() {
+        UserService.shared.fetchUser { self.user = $0 }
+    }
+
+    private func logout() {
         do {
             try Auth.auth().signOut()
         } catch {
@@ -78,8 +91,8 @@ final class MainTabBarController: UITabBarController {
         viewControllers = [
             createNavigationController(image: UIImage(named: "home_unselected"), root: FeedController()),
             createNavigationController(image: UIImage(named: "search_unselected"), root: ExploreController()),
-            createNavigationController(image: UIImage(named: "search_unselected"), root: NotificationsController()),
-            createNavigationController(image: UIImage(named: "search_unselected"), root: ConversationsController())
+            createNavigationController(image: UIImage(named: "like_unselected"), root: NotificationsController()),
+            createNavigationController(image: UIImage(named: "ic_mail_outline_white_2x-1"), root: ConversationsController())
         ]
     }
 
