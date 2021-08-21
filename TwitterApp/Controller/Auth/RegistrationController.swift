@@ -60,9 +60,7 @@ class RegistrationController: UIViewController {
         )
     }()
 
-    private let emailTextField: UITextField  = {
-        UI.textField(placeholder: "Email")
-    }()
+    private let emailTextField = UI.textField(placeholder: "Email")
 
     private let passwordTextField: UITextField  = {
         let tf = UI.textField(placeholder: "Password")
@@ -71,13 +69,9 @@ class RegistrationController: UIViewController {
         return tf
     }()
 
-    private let fullnameTextField: UITextField  = {
-        UI.textField(placeholder: "Full Name")
-    }()
+    private let fullnameTextField = UI.textField(placeholder: "Full Name")
 
-    private let usernameTextField: UITextField  = {
-        UI.textField(placeholder: "Username")
-    }()
+    private let usernameTextField = UI.textField(placeholder: "Username")
 
     private let signUpButton: UIButton = {
         let button = UI.submitButton(title: "Sign Up")

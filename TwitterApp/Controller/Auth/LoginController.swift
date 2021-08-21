@@ -33,9 +33,7 @@ class LoginController: UIViewController {
         )
     }()
 
-    private let emailTextField: UITextField  = {
-        UI.textField(placeholder: "Email")
-    }()
+    private let emailTextField = UI.textField(placeholder: "Email")
 
     private let passwordTextField: UITextField  = {
         let tf = UI.textField(placeholder: "Password")

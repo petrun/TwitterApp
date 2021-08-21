@@ -87,4 +87,14 @@ class UI {
 
         return button
     }
+
+    static func roundImageView(size: CGFloat) -> UIImageView {
+        let imageView = UIImageView()
+        imageView.layer.masksToBounds = true
+        imageView.size(width: size, height: size)
+        imageView.layer.cornerRadius = size / 2
+//        imageView.backgroundColor = .twitterBlue
+
+        return imageView
+    }
 }
