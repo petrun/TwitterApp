@@ -58,7 +58,8 @@ final class MainTabBarController: UITabBarController {
     }
 
     private func fetchUser() {
-        UserService.shared.fetchUser { self.user = $0 }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        UserService.shared.fetchUser(uid: uid) { self.user = $0 }
     }
 
     private func logout() {
@@ -93,7 +94,10 @@ final class MainTabBarController: UITabBarController {
 
     private func confitureViewControllers() {
         viewControllers = [
-            createNavigationController(image: UIImage(named: "home_unselected"), root: FeedController()),
+            createNavigationController(
+                image: UIImage(named: "home_unselected"),
+                root: FeedController(collectionViewLayout: UICollectionViewFlowLayout())
+            ),
             createNavigationController(image: UIImage(named: "search_unselected"), root: ExploreController()),
             createNavigationController(image: UIImage(named: "like_unselected"), root: NotificationsController()),
             createNavigationController(image: UIImage(named: "ic_mail_outline_white_2x-1"), root: ConversationsController())

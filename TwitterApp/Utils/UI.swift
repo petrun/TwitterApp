@@ -97,4 +97,13 @@ class UI {
 
         return imageView
     }
+
+    static func actionButton(image: UIImage?) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(image, for: .normal)
+        button.tintColor = .darkGray
+        button.size(width: 20, height: 20)
+
+        return button
+    }
 }

@@ -110,7 +110,7 @@ class RegistrationController: UIViewController {
             let email = emailTextField.text,
             let password = passwordTextField.text,
             let fullname = fullnameTextField.text,
-            let username = usernameTextField.text,
+            let username = usernameTextField.text?.lowercased(),
             let imageData = profileImage.jpegData(compressionQuality: 0.3)
         else {
             return
