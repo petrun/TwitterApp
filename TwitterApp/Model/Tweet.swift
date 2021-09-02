@@ -11,7 +11,7 @@ struct Tweet {
     let caption: String
     let tweetID: String
     let uid: String
-    var timestamp: Date!
+    let timestamp: Date
     let likes: Int
     let retweetCount: Int
     let user: User
@@ -27,6 +27,8 @@ struct Tweet {
 
         if let timestamp = dict["timestamp"] as? Double {
             self.timestamp = Date(timeIntervalSince1970: timestamp)
+        } else {
+            self.timestamp = Date()
         }
     }
 }

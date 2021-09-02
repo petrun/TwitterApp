@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TweetCellDelegate: class {
+    func handleProfileImageTapped(_ cell: TweetCell)
+}
+
 class TweetCell: UICollectionViewCell {
 
     // MARK: - Properties
@@ -15,7 +19,17 @@ class TweetCell: UICollectionViewCell {
         didSet { configure() }
     }
 
-    private let profileImageView = UI.roundImageView(size: 48)
+    weak var delegate: TweetCellDelegate?
+
+    private lazy var profileImageView: UIImageView = {
+        let imageView = UI.roundImageView(size: 48)
+        imageView.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(handleProfileImageTapped))
+        )
+        imageView.isUserInteractionEnabled = true
+
+        return imageView
+    }()
 
     private let captionLabel: UILabel = {
         let label = UILabel()
@@ -71,11 +85,11 @@ class TweetCell: UICollectionViewCell {
             .top(to: topAnchor, 12)
             .left(to: leftAnchor, 8)
 
-        let stack = UIStackView(arrangedSubviews: [infoLabel, captionLabel])
-
-        stack.axis = .vertical
-        stack.distribution = .fillProportionally
-        stack.spacing = 4
+        let stack = UI.VStack(
+            arrangedSubviews: [infoLabel, captionLabel],
+            spacing: 4,
+            distribution: .fillProportionally
+        )
 
         addSubview(stack)
 
@@ -84,15 +98,16 @@ class TweetCell: UICollectionViewCell {
             .left(to: profileImageView.rightAnchor, 12)
             .right(to: rightAnchor, 12)
 
-        let actionStack = UIStackView(arrangedSubviews: [
-            commentButton,
-            retweetButton,
-            likeButton,
-            shareButton
-        ])
-
-        actionStack.axis = .horizontal
-        actionStack.distribution = .equalSpacing
+        let actionStack = UI.HStack(
+            arrangedSubviews:  [
+                commentButton,
+                retweetButton,
+                likeButton,
+                shareButton
+            ],
+            spacing: 0,
+            distribution: .equalSpacing
+        )
 
         addSubview(actionStack)
 
@@ -132,6 +147,10 @@ class TweetCell: UICollectionViewCell {
 
     @objc func handleShareTapped() {
         print("Tap button \(#function)")
+    }
+
+    @objc func handleProfileImageTapped() {
+        delegate?.handleProfileImageTapped(self)
     }
 
     // MARK: - Helpers

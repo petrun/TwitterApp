@@ -109,6 +109,15 @@ extension UIView {
     }
 }
 
+extension UIView {
+    @discardableResult func border(_ color: UIColor, width: CGFloat) -> Self {
+        layer.borderColor = color.cgColor
+        layer.borderWidth = width
+
+        return self
+    }
+}
+
 // MARK: - UIColor
 
 extension UIColor {

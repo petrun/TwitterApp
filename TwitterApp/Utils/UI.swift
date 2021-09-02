@@ -93,7 +93,8 @@ class UI {
         imageView.layer.masksToBounds = true
         imageView.size(width: size, height: size)
         imageView.layer.cornerRadius = size / 2
-//        imageView.backgroundColor = .twitterBlue
+        imageView.backgroundColor = .twitterBlue
+        imageView.contentMode = .scaleAspectFill
 
         return imageView
     }
@@ -105,5 +106,34 @@ class UI {
         button.size(width: 20, height: 20)
 
         return button
+    }
+}
+
+
+extension UI {
+    static func HStack(
+        arrangedSubviews views: [UIView],
+        spacing: CGFloat,
+        distribution: UIStackView.Distribution
+    ) -> UIStackView {
+        let stack = UIStackView(arrangedSubviews: views)
+        stack.axis = .horizontal
+        stack.spacing = spacing
+        stack.distribution = distribution
+
+        return stack
+    }
+
+    static func VStack(
+        arrangedSubviews views: [UIView],
+        spacing: CGFloat,
+        distribution: UIStackView.Distribution
+    ) -> UIStackView {
+        let stack = UIStackView(arrangedSubviews: views)
+        stack.axis = .vertical
+        stack.spacing = spacing
+        stack.distribution = distribution
+
+        return stack
     }
 }

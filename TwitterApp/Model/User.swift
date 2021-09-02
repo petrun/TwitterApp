@@ -13,6 +13,7 @@ struct User {
     let fullname: String
     var profileImageUrl: URL?
     let username: String
+    var isCurrentUser: Bool { AuthService.shared.currentUserId == uid }
 
     init(uid: String, dict: [String: AnyObject]) {
         self.uid = uid
