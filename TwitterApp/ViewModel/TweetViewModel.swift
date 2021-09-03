@@ -44,6 +44,6 @@ struct TweetViewModel {
 
     init(tweet: Tweet) {
         self.tweet = tweet
-        self.user = tweet.user
+        user = tweet.user
     }
 }

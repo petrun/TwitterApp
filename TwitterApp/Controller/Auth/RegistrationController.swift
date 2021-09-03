@@ -123,7 +123,7 @@ class RegistrationController: UIViewController {
             username: username,
             imageData: imageData
         )) { (error, ref) in
-            print("User register complition ...")
+            print("User register completion ...")
 
             if let error = error {
                 print("Auth error: \(error.localizedDescription)")

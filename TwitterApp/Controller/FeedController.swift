@@ -40,11 +40,7 @@ final class FeedController: UICollectionViewController {
     // MARK: - API
 
     private func fetchTweets() {
-        TweetService.shared.fetchTweets {
-            print("DEBUG: fetchTweets complete \($0.count)")
-            self.tweets = $0
-//            self.collectionView.reloadData()
-        }
+        TweetService.shared.fetchTweets { self.tweets = $0 }
     }
 
     // MARK: - Helpers
@@ -74,16 +70,12 @@ final class FeedController: UICollectionViewController {
 
 extension FeedController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("DEBUG: call numberOfItemsInSection \(tweets.count)")
-        return tweets.count
+        tweets.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("DEBUG: call cellForItemAt")
-
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
         cell.delegate = self
-
         cell.tweet = tweets[indexPath.row]
 
         return cell

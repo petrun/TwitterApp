@@ -9,6 +9,8 @@ import UIKit
 
 protocol ProfileHeaderDelegate: class {
     func handleDismissal()
+    func handleEditProfile(_ header: ProfileHeader)
+    func handleFollow(_ header: ProfileHeader)
 }
 
 class ProfileHeader: UICollectionReusableView {
@@ -31,6 +33,12 @@ class ProfileHeader: UICollectionReusableView {
                 profileHeaderViewModel.actionButtonTitle,
                 for: .normal
             )
+
+            if user.isCurrentUser {
+                editProfileFollowButton.addTarget(self, action: #selector(handleEditProfile), for: .touchUpInside)
+            } else {
+                editProfileFollowButton.addTarget(self, action: #selector(handleFollow), for: .touchUpInside)
+            }
 
             fullnameLabel.text = profileHeaderViewModel.fullnameText
             usernameLabel.text = profileHeaderViewModel.usernameText
@@ -62,18 +70,12 @@ class ProfileHeader: UICollectionReusableView {
 
     private let profileImageView: UIImageView = {
         let iv = UI.roundImageView(size: 80)
-//        iv.contentMode = .scaleAspectFill
-//        iv.clipsToBounds = true
-//        iv.backgroundColor = .lightGray
-//        iv.layer.borderColor = UIColor.white.cgColor
-//        iv.layer.borderWidth = 4
-
         iv.border(.white, width: 4)
 
         return iv
     }()
 
-    private lazy var editProfileFollowButton: UIButton = {
+    lazy var editProfileFollowButton: UIButton = {
         let height: CGFloat = 36
         let button = UIButton(type: .system)
         button
@@ -81,7 +83,6 @@ class ProfileHeader: UICollectionReusableView {
             .size(width: 100, height: height)
         button.setTitleColor(.twitterBlue, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 14)
-        button.addTarget(self, action: #selector(handleEditProfileFollow), for: .touchUpInside)
         button.layer.cornerRadius = height / 2
 
         return button
@@ -247,8 +248,12 @@ class ProfileHeader: UICollectionReusableView {
         delegate?.handleDismissal()
     }
 
-    @objc func handleEditProfileFollow() {
-        print("Call handleEditProfileFollow")
+    @objc func handleEditProfile() {
+        delegate?.handleEditProfile(self)
+    }
+
+    @objc func handleFollow() {
+        delegate?.handleFollow(self)
     }
 
     @objc func handleFollowersTapped() {

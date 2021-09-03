@@ -16,7 +16,14 @@ class TweetCell: UICollectionViewCell {
     // MARK: - Properties
 
     var tweet: Tweet? {
-        didSet { configure() }
+        didSet {
+            guard let tweet = tweet else { return }
+            let viewModel = TweetViewModel(tweet: tweet)
+
+            captionLabel.text = viewModel.caption
+            profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+            infoLabel.attributedText = viewModel.userInfoText
+        }
     }
 
     weak var delegate: TweetCellDelegate?
@@ -151,16 +158,5 @@ class TweetCell: UICollectionViewCell {
 
     @objc func handleProfileImageTapped() {
         delegate?.handleProfileImageTapped(self)
-    }
-
-    // MARK: - Helpers
-
-    private func configure() {
-        guard let tweet = tweet else { return }
-        let viewModel = TweetViewModel(tweet: tweet)
-        
-        captionLabel.text = viewModel.caption
-        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
-        infoLabel.attributedText = viewModel.userInfoText
     }
 }

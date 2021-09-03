@@ -14,8 +14,10 @@ struct User {
     var profileImageUrl: URL?
     let username: String
     var isCurrentUser: Bool { AuthService.shared.currentUserId == uid }
+    var isFollowed = false
+    var stats: UserRelationStats?
 
-    init(uid: String, dict: [String: AnyObject]) {
+    init(uid: String, dict: [String: Any]) {
         self.uid = uid
 
         email = dict["email"] as? String ?? ""
@@ -29,4 +31,9 @@ struct User {
             self.profileImageUrl = profileImageUrl
         }
     }
+}
+
+struct UserRelationStats {
+    var followers: Int
+    var following: Int
 }

@@ -28,15 +28,16 @@ struct ProfileHeaderViewModel {
     }
 
     var followersString: NSAttributedString {
-        attributedText(value: 0, text: "followers")
+        attributedText(value: user.stats?.followers ?? 0, text: "followers")
     }
 
     var followingString: NSAttributedString {
-        attributedText(value: 0, text: "following")
+        attributedText(value: user.stats?.following ?? 0, text: "following")
     }
 
     var actionButtonTitle: String {
-        user.isCurrentUser ? "Edit profile" : "Follow"
+        user.isCurrentUser ? "Edit profile" :
+            (user.isFollowed ? "Following" : "Follow")
     }
 
     init(user: User) {

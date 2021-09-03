@@ -49,7 +49,7 @@ final class MainTabBarController: UITabBarController {
 
             print("DEBUG: User is NOT logged in")
         } else {
-            confitureViewControllers()
+            configureViewControllers()
             configureUI()
             fetchUser()
 
@@ -92,7 +92,7 @@ final class MainTabBarController: UITabBarController {
         actionButton.layer.cornerRadius = 28
     }
 
-    private func confitureViewControllers() {
+    private func configureViewControllers() {
         viewControllers = [
             createNavigationController(
                 image: UIImage(named: "home_unselected"),
