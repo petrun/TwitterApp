@@ -53,6 +53,13 @@ class TweetCell: UICollectionViewCell {
         return label
     }()
 
+    private let underlineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGroupedBackground
+
+        return view
+    }()
+
     private lazy var commentButton: UIButton = {
         let button = UI.actionButton(image: UIImage(named: "comment"))
         button.addTarget(self, action: #selector(handleCommentTapped), for: .touchUpInside)
@@ -81,57 +88,51 @@ class TweetCell: UICollectionViewCell {
         return button
     }()
 
+    private lazy var infoStack: UIStackView = UI.VStack(
+        arrangedSubviews: [infoLabel, captionLabel],
+        spacing: 4,
+        distribution: .fillProportionally
+    )
+
+    private lazy var actionStack = UI.HStack(
+        arrangedSubviews:  [
+            commentButton,
+            retweetButton,
+            likeButton,
+            shareButton
+        ],
+        spacing: 0,
+        distribution: .equalSpacing
+    )
+
     // MARK: - Lifecycle
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        addSubview(profileImageView)
+        addSubview(profileImageView) {
+            $0.top = 12
+            $0.left = 8
+        }
 
-        profileImageView
-            .top(to: topAnchor, 12)
-            .left(to: leftAnchor, 8)
+        addSubview(infoStack) {
+            $0.topAnchor = profileImageView.topAnchor
+            $0.leftAnchor = profileImageView.rightAnchor + 12
+            $0.right = 12
+        }
 
-        let stack = UI.VStack(
-            arrangedSubviews: [infoLabel, captionLabel],
-            spacing: 4,
-            distribution: .fillProportionally
-        )
+        addSubview(actionStack) {
+            $0.left = 50
+            $0.right = 50
+            $0.bottom = 8
+        }
 
-        addSubview(stack)
-
-        stack
-            .top(to: profileImageView.topAnchor)
-            .left(to: profileImageView.rightAnchor, 12)
-            .right(to: rightAnchor, 12)
-
-        let actionStack = UI.HStack(
-            arrangedSubviews:  [
-                commentButton,
-                retweetButton,
-                likeButton,
-                shareButton
-            ],
-            spacing: 0,
-            distribution: .equalSpacing
-        )
-
-        addSubview(actionStack)
-
-        actionStack
-            .left(to: leftAnchor, 50)
-            .right(to: rightAnchor, 50)
-            .bottom(to: bottomAnchor, 8)
-
-        let underlineView = UIView()
-        underlineView.backgroundColor = .systemGroupedBackground
-        addSubview(underlineView)
-
-        underlineView
-            .left(to: leftAnchor)
-            .right(to: rightAnchor)
-            .bottom(to: bottomAnchor)
-            .height(1)
+        addSubview(underlineView) {
+            $0.left = 0
+            $0.right = 0
+            $0.bottom = 0
+            $0.height = 1
+        }
     }
 
     required init?(coder: NSCoder) {
