@@ -33,7 +33,6 @@ final class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        logout()
         authUserAndConfigureUI()
     }
 
@@ -74,7 +73,7 @@ final class MainTabBarController: UITabBarController {
 
     @objc func actionButtonTapped() {
         guard let user = user else { return }
-        let nav = UINavigationController(rootViewController: SendTweetController(user: user))
+        let nav = UINavigationController(rootViewController: SendTweetController(user: user, type: .tweet))
         nav.modalPresentationStyle = .fullScreen
         
         present(nav, animated: true)

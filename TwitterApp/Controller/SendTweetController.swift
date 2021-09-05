@@ -12,17 +12,16 @@ class SendTweetController: UIViewController {
     // MARK: - Properties
 
     private let user: User
+    private let type: TweetType
 
     private lazy var actionButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .twitterBlue
-        button.setTitle("Tweet", for: .normal)
         button.titleLabel?.textAlignment = .center
         button.titleLabel?.font = .boldSystemFont(ofSize: 16)
         button.setTitleColor(.white, for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 64, height: 32)
         button.layer.cornerRadius = 16
-
         button.addTarget(self, action: #selector(handleSendTweet), for: .touchUpInside)
 
         return button
@@ -30,12 +29,21 @@ class SendTweetController: UIViewController {
 
     private let profileImageView = UI.roundImageView(size: 48)
 
+    private let replyLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = .lightGray
+
+        return label
+    }()
+
     private let captionTextView = CaptionTextView()
 
     // MARK: - Lifecycle
 
-    init(user: User) {
+    init(user: User, type: TweetType) {
         self.user = user
+        self.type = type
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -47,6 +55,7 @@ class SendTweetController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureNavigationBar()
         configureUI()
     }
 
@@ -59,15 +68,25 @@ class SendTweetController: UIViewController {
     @objc func handleSendTweet() {
         guard let caption = captionTextView.text, !caption.isEmpty else { return }
 
-        TweetService.shared.uploadTweet(caption: caption) { (error, ref) in
-            if let error = error {
-                print("DEBUG: Failed to upload tweet with error \(error.localizedDescription)")
-                return;
+        switch type {
+        case .tweet:
+            TweetService.shared.createTweet(caption: caption) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: Failed to sent tweet with error \(error.localizedDescription)")
+                    return;
+                }
+
+                self.dismiss(animated: true)
             }
+        case .reply(let tweet):
+            TweetService.shared.reply(to: tweet, caption: caption) { (error, ref) in
+                if let error = error {
+                    print("DEBUG: Failed to reply to tweet \(tweet.tweetID) with error \(error.localizedDescription)")
+                    return;
+                }
 
-            print("DEBUG: tweet success \(ref)")
-
-            self.dismiss(animated: true)
+                self.dismiss(animated: true)
+            }
         }
     }
 
@@ -78,22 +97,32 @@ class SendTweetController: UIViewController {
     private func configureUI() {
         view.backgroundColor = .white
 
-        configureNavigationBar()
+        let viewModel = SendTweetViewModel(type: type)
 
-        let stack = UIStackView(arrangedSubviews: [
-            profileImageView,
-            captionTextView
-        ])
-        stack.alignment = .top
-        stack.axis = .horizontal
-        stack.spacing = 12
+        actionButton.setTitle(viewModel.actionButtonTitle, for: .normal)
 
-        view.addSubview(stack)
+        replyLabel.text = viewModel.replyText
+        replyLabel.isHidden = !viewModel.isShowReplyLabel
 
-        stack
-            .top(to: view.safeAreaLayoutGuide.topAnchor, 16)
-            .left(to: view.leftAnchor, 16)
-            .right(to: view.rightAnchor, 16)
+        captionTextView.placeholderLabel.text = viewModel.placeholderText
+
+        view.addSubview(
+            UI.VStack(
+                arrangedSubviews: [
+                    replyLabel,
+                    UI.HStack(
+                        arrangedSubviews: [profileImageView,captionTextView],
+                        spacing: 12,
+                        alignment: .leading
+                    ),
+                ],
+                spacing: 12
+            )
+        ) {
+            $0.topAnchor = view.safeAreaLayoutGuide.topAnchor + 8
+            $0.leftAnchor = view.leftAnchor + 8
+            $0.rightAnchor = view.rightAnchor + 8
+        }
 
         profileImageView.sd_setImage(with: user.profileImageUrl)
     }

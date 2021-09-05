@@ -107,32 +107,45 @@ class UI {
 
         return button
     }
+
+    static func actionButton(withImageName imageName: String) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: imageName), for: .normal)
+        button.tintColor = .darkGray
+        button.size(width: 20, height: 20)
+
+        return button
+    }
 }
 
 
 extension UI {
     static func HStack(
         arrangedSubviews views: [UIView],
-        spacing: CGFloat,
-        distribution: UIStackView.Distribution
+        spacing: CGFloat = 0,
+        distribution: UIStackView.Distribution = .fill,
+        alignment: UIStackView.Alignment = .fill
     ) -> UIStackView {
         let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .horizontal
         stack.spacing = spacing
         stack.distribution = distribution
+        stack.alignment = alignment
 
         return stack
     }
 
     static func VStack(
         arrangedSubviews views: [UIView],
-        spacing: CGFloat,
-        distribution: UIStackView.Distribution
+        spacing: CGFloat = 0,
+        distribution: UIStackView.Distribution = .fill,
+        alignment: UIStackView.Alignment = .fill
     ) -> UIStackView {
         let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .vertical
         stack.spacing = spacing
         stack.distribution = distribution
+        stack.alignment = alignment
 
         return stack
     }

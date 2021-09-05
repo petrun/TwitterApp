@@ -26,7 +26,7 @@ class CaptionTextView: UITextView {
         super.init(frame: frame, textContainer: textContainer)
 
         font = .systemFont(ofSize: 16)
-        isScrollEnabled = false
+        isScrollEnabled = true
         height(300)
 
         addSubview(placeholderLabel)

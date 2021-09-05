@@ -20,6 +20,9 @@ class Constraints {
     var bottomAnchor: NSLayoutYAxisAnchor?
     var leftAnchor: NSLayoutXAxisAnchor?
     var rightAnchor: NSLayoutXAxisAnchor?
+
+    var centerY: UIView?
+    var centerX: UIView?
 }
 
 private class ConstantsCache {
@@ -83,6 +86,14 @@ extension UIView {
 
         if let rightAnchor = constraints.rightAnchor {
             view.right(to: rightAnchor, ConstantsCache.shared.get(rightAnchor.hash) )
+        }
+
+        if let centerY = constraints.centerY {
+            view.centerY(inView: centerY)
+        }
+
+        if let centerX = constraints.centerX {
+            view.centerX(in: centerX)
         }
     }
 }

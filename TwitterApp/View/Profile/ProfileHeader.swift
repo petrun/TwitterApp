@@ -90,7 +90,7 @@ class ProfileHeader: UICollectionReusableView {
 
     private let fullnameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16)
+        label.font = .systemFont(ofSize: 20)
 
         return label
     }()
@@ -191,28 +191,6 @@ class ProfileHeader: UICollectionReusableView {
 
             return userDetailsStack;
         }()
-
-//        addSubview(userDetailsStack)
-//        userDetailsStack
-//            .top(to: profileImageView.bottomAnchor, 8)
-//            .left(to: leftAnchor, 12)
-//            .right(to: rightAnchor, 12)
-
-//        let userDetailsStack = UI.VStack(
-//            arrangedSubviews: [
-//                fullnameLabel,
-//                usernameLabel,
-//                bioLabel,
-//            ],
-//            spacing: 4,
-//            distribution: .fillProportionally
-//        )
-//
-//        addSubview(userDetailsStack)
-//        userDetailsStack
-//            .top(to: profileImageView.bottomAnchor, 8)
-//            .left(to: leftAnchor, 12)
-//            .right(to: rightAnchor, 12)
 
         let followStack = UI.HStack(
             arrangedSubviews: [followingLabel, followersLabel],
