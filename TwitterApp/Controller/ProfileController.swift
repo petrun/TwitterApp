@@ -11,12 +11,11 @@ private let reuseIdentifier = "TweetCell"
 private let headerReuseIdentifier = "ProfileHeader"
 
 class ProfileController: UICollectionViewController {
-
     // MARK: - Properties
 
     private var user: User
 
-    private var tweets = [Tweet]() {
+    private var tweets: [Tweet] = [] {
         didSet { collectionView.reloadData() }
     }
 
@@ -83,7 +82,6 @@ class ProfileController: UICollectionViewController {
             withReuseIdentifier: headerReuseIdentifier
         )
     }
-
 }
 
 // MARK: UICollectionViewDataSource
@@ -94,7 +92,11 @@ extension ProfileController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: reuseIdentifier,
+            for: indexPath
+        ) as! TweetCell
+
         cell.tweet = tweets[indexPath.row]
 
         return cell
@@ -125,7 +127,7 @@ extension ProfileController {
             withReuseIdentifier: headerReuseIdentifier,
             for: indexPath
         ) as! ProfileHeader
-        
+
         profileHeader.user = user
         profileHeader.delegate = self
 
@@ -142,7 +144,7 @@ extension ProfileController: ProfileHeaderDelegate {
 
     func handleFollow(_ header: ProfileHeader) {
         if user.isFollowed {
-            UserService.shared.unfollowUser(uid: user.uid) { (error, _) in
+            UserService.shared.unfollowUser(uid: user.uid) { error, _ in
                 if let error = error {
                     print("DEBUG: Unfollow user error \(error.localizedDescription)")
                     return
@@ -152,7 +154,7 @@ extension ProfileController: ProfileHeaderDelegate {
                 self.collectionView.reloadData()
             }
         } else {
-            UserService.shared.followUser(uid: user.uid) { (error, _) in
+            UserService.shared.followUser(uid: user.uid) { error, _ in
                 if let error = error {
                     print("DEBUG: Follow user error \(error.localizedDescription)")
                     return

@@ -26,8 +26,6 @@ class ProfileFilterCell: UICollectionViewCell {
         addSubview(titleLabel)
         titleLabel.center(inView: self)
         switchSelected(isSelected: false)
-        
-        titleLabel.text = "Test filter"
     }
 
     required init?(coder: NSCoder) {

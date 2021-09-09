@@ -47,10 +47,14 @@ final class UserCell: UITableViewCell {
 
         profileImageView.centerY(inView: self, leftAnchor: leftAnchor, paddingLeft: 12)
 
-        let stack = UI.VStack(arrangedSubviews: [
-            usernameLabel,
-            fullnameLabel
-        ], spacing: 2, distribution: .fill)
+        let stack = UI.VStack(
+            arrangedSubviews: [
+                usernameLabel,
+                fullnameLabel
+            ],
+            spacing: 2,
+            distribution: .fill
+        )
 
         addSubview(stack)
         stack.centerY(

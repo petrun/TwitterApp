@@ -13,7 +13,7 @@ struct UserService {
     private init() {}
 
     func fetchUser(uid: String, completion: @escaping (User) -> Void) {
-        APIReference.users.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+        APIReference.users.child(uid).observeSingleEvent(of: .value) { snapshot in
             guard let dict = snapshot.value as? [String: AnyObject] else { return }
 
             completion(User(uid: uid, dict: dict))
@@ -21,7 +21,7 @@ struct UserService {
     }
 
     func fetchUsers(completion: @escaping([User]) -> Void) {
-        var users = [User]()
+        var users: [User] = []
 
         APIReference.users.observe(.childAdded) { snapshot in
             guard let dict = snapshot.value as? [String: Any] else { return }
@@ -35,7 +35,7 @@ struct UserService {
     func followUser(uid: String, completion: @escaping (Error?, DatabaseReference) -> Void) {
         guard let currentUserId = AuthService.shared.currentUserId else { return }
 
-        APIReference.userFollowing.child(currentUserId).updateChildValues([uid: 1]) { (error, ref) in
+        APIReference.userFollowing.child(currentUserId).updateChildValues([uid: 1]) { error, ref in
             if let error = error {
                 completion(error, ref)
                 return
@@ -47,7 +47,7 @@ struct UserService {
     func unfollowUser(uid: String, completion: @escaping (Error?, DatabaseReference) -> Void) {
         guard let currentUserId = AuthService.shared.currentUserId else { return }
 
-        APIReference.userFollowing.child(currentUserId).child(uid).removeValue { (error, ref) in
+        APIReference.userFollowing.child(currentUserId).child(uid).removeValue { error, ref in
             if let error = error {
                 completion(error, ref)
                 return

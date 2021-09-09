@@ -14,7 +14,6 @@ protocol ProfileHeaderDelegate: class {
 }
 
 class ProfileHeader: UICollectionReusableView {
-
     // MARK: - Properties
 
     weak var delegate: ProfileHeaderDelegate?
@@ -112,7 +111,6 @@ This is a user bio what will span more than one line for test
 purposes This is a user bio what will span more than one line for test purposes
 This is a user bio what will span more than one line for test purposes
 """
-
         return label
     }()
 

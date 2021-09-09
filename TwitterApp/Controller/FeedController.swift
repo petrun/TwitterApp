@@ -18,7 +18,7 @@ final class FeedController: UICollectionViewController {
     }
 
     // @todo reload item
-    private var tweets = [Tweet]() {
+    private var tweets: [Tweet] = [] {
         didSet { collectionView.reloadData() }
     }
 
@@ -88,7 +88,11 @@ extension FeedController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: reuseIdentifier,
+            for: indexPath
+        ) as! TweetCell
+
         cell.delegate = self
         cell.tweet = tweets[indexPath.row]
 
@@ -120,7 +124,7 @@ extension FeedController: TweetCellDelegate {
     func handleLikeTapped(_ cell: TweetCell) {
         guard let tweet = cell.tweet else { return }
 
-        TweetService.shared.like(tweet: tweet) { (error, _) in
+        TweetService.shared.like(tweet: tweet) { error, _ in
             if let error = error {
                 print("DEBUG: like error \(error.localizedDescription)")
                 return

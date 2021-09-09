@@ -75,7 +75,7 @@ final class MainTabBarController: UITabBarController {
         guard let user = user else { return }
         let nav = UINavigationController(rootViewController: SendTweetController(user: user, type: .tweet))
         nav.modalPresentationStyle = .fullScreen
-        
+
         present(nav, animated: true)
     }
 
@@ -94,20 +94,19 @@ final class MainTabBarController: UITabBarController {
     private func configureViewControllers() {
         viewControllers = [
             createNavigationController(
-                image: UIImage(named: "home_unselected"),
+                imageName: "home_unselected",
                 root: FeedController(collectionViewLayout: UICollectionViewFlowLayout())
             ),
-            createNavigationController(image: UIImage(named: "search_unselected"), root: ExploreController()),
-            createNavigationController(image: UIImage(named: "like_unselected"), root: NotificationsController()),
-            createNavigationController(image: UIImage(named: "ic_mail_outline_white_2x-1"), root: ConversationsController())
+            createNavigationController(imageName: "search_unselected", root: ExploreController()),
+            createNavigationController(imageName: "like_unselected", root: NotificationsController()),
+            createNavigationController(imageName: "ic_mail_outline_white_2x-1", root: ConversationsController())
         ]
     }
 
-    private func createNavigationController(image: UIImage?, root: UIViewController) -> UINavigationController {
+    private func createNavigationController(imageName: String, root: UIViewController) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: root)
-        navigationController.tabBarItem.image = image
+        navigationController.tabBarItem.image = UIImage(named: imageName)
         navigationController.navigationBar.barTintColor = .white
         return navigationController
     }
-
 }

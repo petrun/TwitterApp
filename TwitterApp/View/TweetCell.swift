@@ -14,7 +14,6 @@ protocol TweetCellDelegate: class {
 }
 
 class TweetCell: UICollectionViewCell {
-
     // MARK: - Properties
 
     var tweet: Tweet? {

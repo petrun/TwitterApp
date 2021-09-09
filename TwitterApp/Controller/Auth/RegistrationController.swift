@@ -116,13 +116,15 @@ class RegistrationController: UIViewController {
             return
         }
 
-        AuthService.shared.registerUser(credentials: AuthCredentials(
-            email: email,
-            password: password,
-            fullname: fullname,
-            username: username,
-            imageData: imageData
-        )) { (error, _) in
+        AuthService.shared.registerUser(
+            credentials: AuthCredentials(
+                email: email,
+                password: password,
+                fullname: fullname,
+                username: username,
+                imageData: imageData
+            )
+        ) { error, _ in
             print("User register completion ...")
 
             if let error = error {
@@ -160,7 +162,6 @@ class RegistrationController: UIViewController {
             )
             .size(width: 150, height: 150)
             .layer.cornerRadius = 150 / 2
-//        addPhotoButton.layer.masksToBounds = true
 
         // Stack
         let stack = UIStackView(arrangedSubviews: [

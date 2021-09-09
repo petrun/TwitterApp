@@ -26,7 +26,7 @@ class Constraints {
 }
 
 private class ConstantsCache {
-    var cache = [Int: CGFloat]()
+    var cache: [Int: CGFloat] = [:]
 
     static var shared = ConstantsCache()
 

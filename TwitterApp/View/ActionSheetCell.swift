@@ -8,7 +8,6 @@
 import UIKit
 
 class ActionSheetCell: UITableViewCell {
-
     // MARK: - Properties
 
     var option: ActionSheetOptions? {

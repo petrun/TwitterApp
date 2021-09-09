@@ -12,7 +12,6 @@ protocol TweetHeaderDelegate: class {
 }
 
 class TweetHeader: UICollectionReusableView {
-
     // MARK: - Properties
 
     var tweet: Tweet? {
@@ -88,15 +87,21 @@ class TweetHeader: UICollectionReusableView {
         return button
     }()
 
-    private lazy var usernameStack = UI.VStack(arrangedSubviews: [
-        fullnameLabel,
-        usernameLabel
-    ], spacing: -6)
+    private lazy var usernameStack = UI.VStack(
+        arrangedSubviews: [
+            fullnameLabel,
+            usernameLabel
+        ],
+        spacing: -6
+    )
 
-    private lazy var userInfoStack = UI.HStack(arrangedSubviews: [
-        profileImageView,
-        usernameStack
-    ], spacing: 12)
+    private lazy var userInfoStack = UI.HStack(
+        arrangedSubviews: [
+            profileImageView,
+            usernameStack
+        ],
+        spacing: 12
+    )
 
     private lazy var statsView: UIView = {
         func createDivider() -> UIView {
@@ -109,10 +114,13 @@ class TweetHeader: UICollectionReusableView {
 
         let view = UIView()
 
-        let stack = UI.HStack(arrangedSubviews: [
-            retweetLabel,
-            likesLabel
-        ], spacing: 12)
+        let stack = UI.HStack(
+            arrangedSubviews: [
+                retweetLabel,
+                likesLabel
+            ],
+            spacing: 12
+        )
 
         view.addSubview(createDivider()) {
             $0.top = 0

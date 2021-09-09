@@ -8,7 +8,6 @@
 import UIKit
 
 class SendTweetController: UIViewController {
-
     // MARK: - Properties
 
     private let user: User
@@ -70,7 +69,7 @@ class SendTweetController: UIViewController {
 
         switch type {
         case .tweet:
-            TweetService.shared.createTweet(caption: caption) { (error, _) in
+            TweetService.shared.createTweet(caption: caption) { error, _ in
                 if let error = error {
                     print("DEBUG: Failed to sent tweet with error \(error.localizedDescription)")
                     return
@@ -79,7 +78,7 @@ class SendTweetController: UIViewController {
                 self.dismiss(animated: true)
             }
         case .reply(let tweet):
-            TweetService.shared.reply(to: tweet, caption: caption) { (error, _) in
+            TweetService.shared.reply(to: tweet, caption: caption) { error, _ in
                 if let error = error {
                     print("DEBUG: Failed to reply to tweet \(tweet.tweetID) with error \(error.localizedDescription)")
                     return
@@ -129,8 +128,11 @@ class SendTweetController: UIViewController {
 
     private func configureNavigationBar() {
         navigationController?.navigationBar.barTintColor = .white
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(handleCancel)
+        )
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: actionButton)
     }
-
 }

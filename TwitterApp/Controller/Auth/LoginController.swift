@@ -70,7 +70,7 @@ class LoginController: UIViewController {
             return
         }
 
-        AuthService.shared.login(email: email, password: password) { (_, error) in
+        AuthService.shared.login(email: email, password: password) { _, error in
             if let error = error {
                 print("Auth error: \(error.localizedDescription)")
                 return

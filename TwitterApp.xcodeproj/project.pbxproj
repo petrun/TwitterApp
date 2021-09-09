@@ -42,9 +42,6 @@
 		A189447326CDB0260033ACA5 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189447226CDB0260033ACA5 /* UI.swift */; };
 		A189C31B26E8EF3100985716 /* ActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189C31A26E8EF3100985716 /* ActionSheetCell.swift */; };
 		A189C31E26E9003100985716 /* ActionSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189C31D26E9003100985716 /* ActionSheetViewModel.swift */; };
-		A18ADD9E26D2517300F0B782 /* FBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18ADD9D26D2517300F0B782 /* FBDatabase.swift */; };
-		A18ADDA326D2519500F0B782 /* FBStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18ADDA226D2519500F0B782 /* FBStorage.swift */; };
-		A18ADDA626D251A200F0B782 /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18ADDA526D251A200F0B782 /* FBAuth.swift */; };
 		A18ADDA926D2524800F0B782 /* RemoteDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18ADDA826D2524800F0B782 /* RemoteDatabase.swift */; };
 		A18ADDAC26D2527A00F0B782 /* RemoteStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18ADDAB26D2527A00F0B782 /* RemoteStorage.swift */; };
 		A18ADDAF26D252A500F0B782 /* RemoteAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18ADDAE26D252A500F0B782 /* RemoteAuth.swift */; };
@@ -96,9 +93,6 @@
 		A189447226CDB0260033ACA5 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		A189C31A26E8EF3100985716 /* ActionSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetCell.swift; sourceTree = "<group>"; };
 		A189C31D26E9003100985716 /* ActionSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetViewModel.swift; sourceTree = "<group>"; };
-		A18ADD9D26D2517300F0B782 /* FBDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDatabase.swift; sourceTree = "<group>"; };
-		A18ADDA226D2519500F0B782 /* FBStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStorage.swift; sourceTree = "<group>"; };
-		A18ADDA526D251A200F0B782 /* FBAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
 		A18ADDA826D2524800F0B782 /* RemoteDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDatabase.swift; sourceTree = "<group>"; };
 		A18ADDAB26D2527A00F0B782 /* RemoteStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteStorage.swift; sourceTree = "<group>"; };
 		A18ADDAE26D252A500F0B782 /* RemoteAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuth.swift; sourceTree = "<group>"; };
@@ -274,22 +268,11 @@
 		A18ADD9C26D2513F00F0B782 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				A18ADDA026D2518300F0B782 /* Firebase */,
 				A18ADDA826D2524800F0B782 /* RemoteDatabase.swift */,
 				A18ADDAB26D2527A00F0B782 /* RemoteStorage.swift */,
 				A18ADDAE26D252A500F0B782 /* RemoteAuth.swift */,
 			);
 			path = Lib;
-			sourceTree = "<group>";
-		};
-		A18ADDA026D2518300F0B782 /* Firebase */ = {
-			isa = PBXGroup;
-			children = (
-				A18ADD9D26D2517300F0B782 /* FBDatabase.swift */,
-				A18ADDA226D2519500F0B782 /* FBStorage.swift */,
-				A18ADDA526D251A200F0B782 /* FBAuth.swift */,
-			);
-			path = Firebase;
 			sourceTree = "<group>";
 		};
 		A1FADD5926DFB55200329DEE /* Profile */ = {
@@ -439,7 +422,6 @@
 				A145B7DC26CFE98900A6FAC5 /* UserService.swift in Sources */,
 				A11FB54726C9D54500A2E55E /* NotificationsController.swift in Sources */,
 				A14A734526D18D0B00F31222 /* CaptionTextView.swift in Sources */,
-				A18ADDA326D2519500F0B782 /* FBStorage.swift in Sources */,
 				A189C31E26E9003100985716 /* ActionSheetViewModel.swift in Sources */,
 				A11FB54A26C9D56800A2E55E /* ConversationsController.swift in Sources */,
 				A18ADDAF26D252A500F0B782 /* RemoteAuth.swift in Sources */,
@@ -455,12 +437,10 @@
 				A11FB54426C9D52800A2E55E /* ExploreController.swift in Sources */,
 				A13D512F26CF03DE000393AE /* AuthService.swift in Sources */,
 				A145B7DF26CFEE1C00A6FAC5 /* User.swift in Sources */,
-				A18ADDA626D251A200F0B782 /* FBAuth.swift in Sources */,
 				A11FB53D26C9D22100A2E55E /* MainTabBarController.swift in Sources */,
 				A18ADDA926D2524800F0B782 /* RemoteDatabase.swift in Sources */,
 				A18ADDB526D2C8DC00F0B782 /* TweetViewModel.swift in Sources */,
 				A11FB52026C9D06000A2E55E /* SceneDelegate.swift in Sources */,
-				A18ADD9E26D2517300F0B782 /* FBDatabase.swift in Sources */,
 				A11AF21026E11B6F00C21F0F /* UserCell.swift in Sources */,
 				A13E222E26E2D1F90088CC68 /* UIBuilder.swift in Sources */,
 				A196013926E3E6FF0059DC60 /* TweetActionsStackView.swift in Sources */,

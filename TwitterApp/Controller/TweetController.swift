@@ -15,7 +15,7 @@ class TweetController: UICollectionViewController {
 
     private let tweet: Tweet
     private var actionSheetLauncher: ActionSheetLauncher!
-    private var replies = [Tweet]() {
+    private var replies: [Tweet] = [] {
         didSet { collectionView.reloadData() }
     }
 
@@ -66,7 +66,11 @@ extension TweetController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TweetCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: reuseIdentifier,
+            for: indexPath
+        ) as! TweetCell
+
         cell.tweet = replies[indexPath.row]
 
         return cell
@@ -97,7 +101,7 @@ extension TweetController {
             withReuseIdentifier: headerReuseIdentifier,
             for: indexPath
         ) as! TweetHeader
-        
+
         tweetHeader.tweet = tweet
         tweetHeader.delegate = self
 
@@ -108,7 +112,7 @@ extension TweetController {
 // MARK: - TweetHeaderDelegate
 
 extension TweetController: TweetHeaderDelegate {
-    fileprivate func showActionSheet(forUser user: User) {
+    private func showActionSheet(forUser user: User) {
         actionSheetLauncher = ActionSheetLauncher(user: user)
         actionSheetLauncher.delegate = self
         actionSheetLauncher.show()
@@ -133,7 +137,7 @@ extension TweetController: ActionSheetLauncherDelegate {
     func didSelect(option: ActionSheetOptions) {
         switch option {
         case .follow(let user):
-            UserService.shared.followUser(uid: user.uid) { (error, _) in
+            UserService.shared.followUser(uid: user.uid) { error, _ in
                 if let error = error {
                     print("Follow user error: \(error.localizedDescription)")
                     return
@@ -141,7 +145,7 @@ extension TweetController: ActionSheetLauncherDelegate {
                 print("DEBUG: Did follow user \(user.username)")
             }
         case .unfollow(let user):
-            UserService.shared.unfollowUser(uid: user.uid) { (error, _) in
+            UserService.shared.unfollowUser(uid: user.uid) { error, _ in
                 if let error = error {
                     print("Unfollow user error: \(error.localizedDescription)")
                     return

@@ -12,11 +12,11 @@ private let reuseIdentifier = "UserCell"
 final class ExploreController: UITableViewController {
     // MARK: - Properties
 
-    private var users = [User]() {
+    private var users: [User] = [] {
         didSet { tableView.reloadData() }
     }
 
-    private var filteredUsers = [User]() {
+    private var filteredUsers: [User] = [] {
         didSet { tableView.reloadData() }
     }
 
