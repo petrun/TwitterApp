@@ -74,6 +74,16 @@ struct TweetViewModel {
 
     // MARK: - Helpers
 
+    func height(forWidth width: CGFloat) ->CGFloat {
+        let measurementLabel = UILabel()
+        measurementLabel.text = tweet.caption
+        measurementLabel.numberOfLines = 0
+        measurementLabel.lineBreakMode = .byWordWrapping
+        measurementLabel.width(width)
+
+        return measurementLabel.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+    }
+
     private func attributedText(value: Int, text: String) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: "\(value) ", attributes: [
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),

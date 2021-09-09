@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TweetHeaderDelegate: class {
+    func showActionSheet()
+}
+
 class TweetHeader: UICollectionReusableView {
 
     // MARK: - Properties
@@ -26,6 +30,8 @@ class TweetHeader: UICollectionReusableView {
             likesLabel.attributedText = viewModel.likesString
         }
     }
+
+    weak var delegate: TweetHeaderDelegate?
 
     private lazy var profileImageView: UIImageView = {
         let imageView = UI.roundImageView(size: 48)
@@ -179,15 +185,6 @@ class TweetHeader: UICollectionReusableView {
     }
 
     @objc func showActionSheet() {
-        print("Call showActionSheet")
-    }
-
-    // MARK: - Helpers
-
-    func getSize(forWidth width: CGFloat) ->CGSize {
-        //@todo restore old width
-        self.width(width)
-
-        return self.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        delegate?.showActionSheet()
     }
 }

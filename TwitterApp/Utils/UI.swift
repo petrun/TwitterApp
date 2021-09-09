@@ -123,14 +123,18 @@ extension UI {
     static func HStack(
         arrangedSubviews views: [UIView],
         spacing: CGFloat = 0,
-        distribution: UIStackView.Distribution = .fill,
-        alignment: UIStackView.Alignment = .fill
+        distribution: UIStackView.Distribution? = nil,
+        alignment: UIStackView.Alignment? = nil
     ) -> UIStackView {
         let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .horizontal
         stack.spacing = spacing
-        stack.distribution = distribution
-        stack.alignment = alignment
+        if let distribution = distribution {
+            stack.distribution = distribution
+        }
+        if let alignment = alignment {
+            stack.alignment = alignment
+        }
 
         return stack
     }
@@ -138,14 +142,18 @@ extension UI {
     static func VStack(
         arrangedSubviews views: [UIView],
         spacing: CGFloat = 0,
-        distribution: UIStackView.Distribution = .fill,
-        alignment: UIStackView.Alignment = .fill
+        distribution: UIStackView.Distribution? = nil,
+        alignment: UIStackView.Alignment? = nil
     ) -> UIStackView {
         let stack = UIStackView(arrangedSubviews: views)
         stack.axis = .vertical
         stack.spacing = spacing
-        stack.distribution = distribution
-        stack.alignment = alignment
+        if let distribution = distribution {
+            stack.distribution = distribution
+        }
+        if let alignment = alignment {
+            stack.alignment = alignment
+        }
 
         return stack
     }

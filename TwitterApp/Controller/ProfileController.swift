@@ -105,7 +105,10 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: view.frame.width, height: 120)
+        CGSize(
+            width: view.frame.width,
+            height: TweetViewModel(tweet: tweets[indexPath.row]).height(forWidth: view.frame.width) + 72
+        )
     }
 }
 

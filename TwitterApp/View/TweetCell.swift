@@ -144,7 +144,6 @@ class TweetCell: UICollectionViewCell {
 
     @objc func handleCommentTapped() {
         delegate?.handleReplyTapped(self)
-        print("Tap button \(#function)")
     }
 
     @objc func handleRetweetTapped() {

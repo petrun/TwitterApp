@@ -22,6 +22,7 @@
 		A122307F26D865AA002DD1D4 /* ProfileFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A122307E26D865AA002DD1D4 /* ProfileFilterView.swift */; };
 		A122308226D86973002DD1D4 /* ProfileFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A122308126D86973002DD1D4 /* ProfileFilterCell.swift */; };
 		A1384ED126E4AC26000E4AAE /* SendTweetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1384ED026E4AC26000E4AAE /* SendTweetViewModel.swift */; };
+		A1384ED426E52CD6000E4AAE /* ActionSheetLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1384ED326E52CD6000E4AAE /* ActionSheetLauncher.swift */; };
 		A13D512726CEAC5A000393AE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A13D512626CEAC5A000393AE /* GoogleService-Info.plist */; };
 		A13D512A26CEE9DA000393AE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D512926CEE9DA000393AE /* Constants.swift */; };
 		A13D512F26CF03DE000393AE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13D512E26CF03DE000393AE /* AuthService.swift */; };
@@ -38,6 +39,8 @@
 		A189446D26CD988C0033ACA5 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189446C26CD988C0033ACA5 /* LoginController.swift */; };
 		A189447026CD98F80033ACA5 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189446F26CD98F80033ACA5 /* RegistrationController.swift */; };
 		A189447326CDB0260033ACA5 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189447226CDB0260033ACA5 /* UI.swift */; };
+		A189C31B26E8EF3100985716 /* ActionSheetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189C31A26E8EF3100985716 /* ActionSheetCell.swift */; };
+		A189C31E26E9003100985716 /* ActionSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189C31D26E9003100985716 /* ActionSheetViewModel.swift */; };
 		A18ADD9E26D2517300F0B782 /* FBDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18ADD9D26D2517300F0B782 /* FBDatabase.swift */; };
 		A18ADDA326D2519500F0B782 /* FBStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18ADDA226D2519500F0B782 /* FBStorage.swift */; };
 		A18ADDA626D251A200F0B782 /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18ADDA526D251A200F0B782 /* FBAuth.swift */; };
@@ -72,6 +75,7 @@
 		A122307E26D865AA002DD1D4 /* ProfileFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterView.swift; sourceTree = "<group>"; };
 		A122308126D86973002DD1D4 /* ProfileFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFilterCell.swift; sourceTree = "<group>"; };
 		A1384ED026E4AC26000E4AAE /* SendTweetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTweetViewModel.swift; sourceTree = "<group>"; };
+		A1384ED326E52CD6000E4AAE /* ActionSheetLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetLauncher.swift; sourceTree = "<group>"; };
 		A13D512626CEAC5A000393AE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A13D512926CEE9DA000393AE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A13D512E26CF03DE000393AE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		A189446C26CD988C0033ACA5 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		A189446F26CD98F80033ACA5 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
 		A189447226CDB0260033ACA5 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		A189C31A26E8EF3100985716 /* ActionSheetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetCell.swift; sourceTree = "<group>"; };
+		A189C31D26E9003100985716 /* ActionSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetViewModel.swift; sourceTree = "<group>"; };
 		A18ADD9D26D2517300F0B782 /* FBDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDatabase.swift; sourceTree = "<group>"; };
 		A18ADDA226D2519500F0B782 /* FBStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStorage.swift; sourceTree = "<group>"; };
 		A18ADDA526D251A200F0B782 /* FBAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
@@ -204,6 +210,7 @@
 				A18ADDB426D2C8DC00F0B782 /* TweetViewModel.swift */,
 				A1FADD5B26DFC2B900329DEE /* ProfileHeaderViewModel.swift */,
 				A1384ED026E4AC26000E4AAE /* SendTweetViewModel.swift */,
+				A189C31D26E9003100985716 /* ActionSheetViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -216,6 +223,7 @@
 				A1FADD5926DFB55200329DEE /* Profile */,
 				A13E222926E27D030088CC68 /* Tweet */,
 				A11AF20F26E11B6F00C21F0F /* UserCell.swift */,
+				A189C31A26E8EF3100985716 /* ActionSheetCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -237,6 +245,7 @@
 				A13D512926CEE9DA000393AE /* Constants.swift */,
 				A13E222D26E2D1F90088CC68 /* UIBuilder.swift */,
 				A196013526E3DF310059DC60 /* UIButton+extension.swift */,
+				A1384ED326E52CD6000E4AAE /* ActionSheetLauncher.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -409,8 +418,10 @@
 				A11FB54726C9D54500A2E55E /* NotificationsController.swift in Sources */,
 				A14A734526D18D0B00F31222 /* CaptionTextView.swift in Sources */,
 				A18ADDA326D2519500F0B782 /* FBStorage.swift in Sources */,
+				A189C31E26E9003100985716 /* ActionSheetViewModel.swift in Sources */,
 				A11FB54A26C9D56800A2E55E /* ConversationsController.swift in Sources */,
 				A18ADDAF26D252A500F0B782 /* RemoteAuth.swift in Sources */,
+				A189C31B26E8EF3100985716 /* ActionSheetCell.swift in Sources */,
 				A11FB51E26C9D06000A2E55E /* AppDelegate.swift in Sources */,
 				A13E222B26E27D250088CC68 /* TweetHeader.swift in Sources */,
 				A1B7D39926D42085008440A7 /* ProfileController.swift in Sources */,
@@ -434,6 +445,7 @@
 				A1384ED126E4AC26000E4AAE /* SendTweetViewModel.swift in Sources */,
 				A1637C9F26D07D8000531CF3 /* SendTweetController.swift in Sources */,
 				A122308226D86973002DD1D4 /* ProfileFilterCell.swift in Sources */,
+				A1384ED426E52CD6000E4AAE /* ActionSheetLauncher.swift in Sources */,
 				A189447326CDB0260033ACA5 /* UI.swift in Sources */,
 				A189447026CD98F80033ACA5 /* RegistrationController.swift in Sources */,
 				A11FB54126C9D4B800A2E55E /* FeedController.swift in Sources */,
