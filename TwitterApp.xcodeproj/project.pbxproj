@@ -35,6 +35,7 @@
 		A14A734826D19DE900F31222 /* TweetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14A734726D19DE900F31222 /* TweetService.swift */; };
 		A14A734B26D1C78700F31222 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14A734A26D1C78700F31222 /* Tweet.swift */; };
 		A1637C9F26D07D8000531CF3 /* SendTweetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1637C9E26D07D8000531CF3 /* SendTweetController.swift */; };
+		A181939B26EA70F7008A68CF /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = A181939A26EA70F7008A68CF /* .swiftlint.yml */; };
 		A189446926CD84360033ACA5 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189446826CD84360033ACA5 /* Extensions.swift */; };
 		A189446D26CD988C0033ACA5 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189446C26CD988C0033ACA5 /* LoginController.swift */; };
 		A189447026CD98F80033ACA5 /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A189446F26CD98F80033ACA5 /* RegistrationController.swift */; };
@@ -88,6 +89,7 @@
 		A14A734726D19DE900F31222 /* TweetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetService.swift; sourceTree = "<group>"; };
 		A14A734A26D1C78700F31222 /* Tweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		A1637C9E26D07D8000531CF3 /* SendTweetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTweetController.swift; sourceTree = "<group>"; };
+		A181939A26EA70F7008A68CF /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		A189446826CD84360033ACA5 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A189446C26CD988C0033ACA5 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		A189446F26CD98F80033ACA5 /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				A11FB52826C9D06100A2E55E /* LaunchScreen.storyboard */,
 				A13D512626CEAC5A000393AE /* GoogleService-Info.plist */,
 				A11FB52B26C9D06100A2E55E /* Info.plist */,
+				A181939A26EA70F7008A68CF /* .swiftlint.yml */,
 			);
 			path = TwitterApp;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				A11FB51726C9D06000A2E55E /* Frameworks */,
 				A11FB51826C9D06000A2E55E /* Resources */,
 				221212564EA6560AC8787468 /* [CP] Embed Pods Frameworks */,
+				A181939826EA705F008A68CF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -358,6 +362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A181939B26EA70F7008A68CF /* .swiftlint.yml in Resources */,
 				A11FB52A26C9D06100A2E55E /* LaunchScreen.storyboard in Resources */,
 				A13D512726CEAC5A000393AE /* GoogleService-Info.plist in Resources */,
 				A11FB52726C9D06100A2E55E /* Assets.xcassets in Resources */,
@@ -406,6 +411,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TwitterApp/Pods-TwitterApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		A181939826EA705F008A68CF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

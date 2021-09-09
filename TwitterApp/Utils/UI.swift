@@ -8,7 +8,6 @@
 import UIKit
 
 class UI {
-    
     static func inputContainerView(image: UIImage, textField: UITextField) -> UIView {
         let view = UIView().height(50)
 
@@ -47,15 +46,15 @@ class UI {
     }
 
     static func textField(placeholder: String) -> UITextField {
-        let tf = UITextField()
-        tf.textColor = .white
-        tf.font = .systemFont(ofSize: 16)
-        tf.attributedPlaceholder = NSAttributedString(
+        let textField = UITextField()
+        textField.textColor = .white
+        textField.font = .systemFont(ofSize: 16)
+        textField.attributedPlaceholder = NSAttributedString(
             string: placeholder,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white]
         )
 
-        return tf
+        return textField
     }
 
     static func attributedButton(_ firstPart: String, _ secondPart: String) -> UIButton {
@@ -63,12 +62,12 @@ class UI {
 
         let attributedTitle = NSMutableAttributedString(string: "\(firstPart) ", attributes: [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
-            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.foregroundColor: UIColor.white
         ])
 
         attributedTitle.append(NSAttributedString(string: secondPart, attributes: [
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16),
-            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.foregroundColor: UIColor.white
         ]))
 
         button.setAttributedTitle(attributedTitle, for: .normal)
@@ -117,7 +116,6 @@ class UI {
         return button
     }
 }
-
 
 extension UI {
     static func HStack(

@@ -49,7 +49,7 @@ final class UserCell: UITableViewCell {
 
         let stack = UI.VStack(arrangedSubviews: [
             usernameLabel,
-            fullnameLabel,
+            fullnameLabel
         ], spacing: 2, distribution: .fill)
 
         addSubview(stack)

@@ -17,7 +17,7 @@ final class FeedController: UICollectionViewController {
         didSet { configureLeftBarButton() }
     }
 
-    //@todo reload item
+    // @todo reload item
     private var tweets = [Tweet]() {
         didSet { collectionView.reloadData() }
     }
@@ -47,7 +47,7 @@ final class FeedController: UICollectionViewController {
         }
     }
 
-    //@todo move to service
+    // @todo move to service
     private func checkIfUserLiked(tweets: [Tweet]) {
         for (index, tweet) in tweets.enumerated() {
             TweetService.shared.checkIfUserLiked(tweet: tweet) {
@@ -120,7 +120,7 @@ extension FeedController: TweetCellDelegate {
     func handleLikeTapped(_ cell: TweetCell) {
         guard let tweet = cell.tweet else { return }
 
-        TweetService.shared.like(tweet: tweet) { (error, ref) in
+        TweetService.shared.like(tweet: tweet) { (error, _) in
             if let error = error {
                 print("DEBUG: like error \(error.localizedDescription)")
                 return

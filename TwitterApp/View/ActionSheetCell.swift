@@ -12,17 +12,17 @@ class ActionSheetCell: UITableViewCell {
     // MARK: - Properties
 
     var option: ActionSheetOptions? {
-        didSet{
+        didSet {
             titleLabel.text = option?.description
         }
     }
 
     private let optionImageView: UIImageView = {
-        let iv = UIImageView(image: UIImage(named: "twitter_logo_blue"))
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
+        let imageView = UIImageView(image: UIImage(named: "twitter_logo_blue"))
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
 
-        return iv
+        return imageView
     }()
 
     private let titleLabel: UILabel = {

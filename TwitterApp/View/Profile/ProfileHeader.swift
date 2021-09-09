@@ -69,10 +69,10 @@ class ProfileHeader: UICollectionReusableView {
     }()
 
     private let profileImageView: UIImageView = {
-        let iv = UI.roundImageView(size: 80)
-        iv.border(.white, width: 4)
+        let imageView = UI.roundImageView(size: 80)
+        imageView.border(.white, width: 4)
 
-        return iv
+        return imageView
     }()
 
     lazy var editProfileFollowButton: UIButton = {
@@ -107,7 +107,11 @@ class ProfileHeader: UICollectionReusableView {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
         label.numberOfLines = 3
-        label.text = "This is a user bio what will span more than one line for test purposes This is a user bio what will span more than one line for test purposes This is a user bio what will span more than one line for test purposes"
+        label.text = """
+This is a user bio what will span more than one line for test
+purposes This is a user bio what will span more than one line for test purposes
+This is a user bio what will span more than one line for test purposes
+"""
 
         return label
     }()
@@ -155,7 +159,7 @@ class ProfileHeader: UICollectionReusableView {
             profileImageView,
             editProfileFollowButton,
             filterBar,
-            underlineView,
+            underlineView
         ].forEach { addSubview($0) }
 
         containerView
@@ -177,7 +181,7 @@ class ProfileHeader: UICollectionReusableView {
                 arrangedSubviews: [
                     fullnameLabel,
                     usernameLabel,
-                    bioLabel,
+                    bioLabel
                 ],
                 spacing: 4,
                 distribution: .fillProportionally
@@ -189,7 +193,7 @@ class ProfileHeader: UICollectionReusableView {
                 .left(to: leftAnchor, 12)
                 .right(to: rightAnchor, 12)
 
-            return userDetailsStack;
+            return userDetailsStack
         }()
 
         let followStack = UI.HStack(

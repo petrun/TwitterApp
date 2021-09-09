@@ -48,12 +48,12 @@ struct ProfileHeaderViewModel {
 
     private func attributedText(value: Int, text: String) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: "\(value) ", attributes: [
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)
         ])
 
         attributedString.append(NSAttributedString(string: text, attributes: [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
-            NSAttributedString.Key.foregroundColor: UIColor.lightGray,
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray
         ]))
 
         return attributedString

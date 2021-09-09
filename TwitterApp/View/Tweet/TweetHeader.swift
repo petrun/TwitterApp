@@ -90,12 +90,12 @@ class TweetHeader: UICollectionReusableView {
 
     private lazy var usernameStack = UI.VStack(arrangedSubviews: [
         fullnameLabel,
-        usernameLabel,
+        usernameLabel
     ], spacing: -6)
 
     private lazy var userInfoStack = UI.HStack(arrangedSubviews: [
         profileImageView,
-        usernameStack,
+        usernameStack
     ], spacing: 12)
 
     private lazy var statsView: UIView = {

@@ -77,7 +77,11 @@ class ProfileController: UICollectionViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
 
         collectionView.register(TweetCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-        collectionView.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerReuseIdentifier)
+        collectionView.register(
+            ProfileHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: headerReuseIdentifier
+        )
     }
 
 }
@@ -116,7 +120,12 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
 
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let profileHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerReuseIdentifier, for: indexPath) as! ProfileHeader
+        let profileHeader = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: headerReuseIdentifier,
+            for: indexPath
+        ) as! ProfileHeader
+        
         profileHeader.user = user
         profileHeader.delegate = self
 
@@ -133,13 +142,21 @@ extension ProfileController: ProfileHeaderDelegate {
 
     func handleFollow(_ header: ProfileHeader) {
         if user.isFollowed {
-            UserService.shared.unfollowUser(uid: user.uid) { (error, ref) in
+            UserService.shared.unfollowUser(uid: user.uid) { (error, _) in
+                if let error = error {
+                    print("DEBUG: Unfollow user error \(error.localizedDescription)")
+                    return
+                }
                 self.user.isFollowed = false
                 self.user.stats?.followers -= 1
                 self.collectionView.reloadData()
             }
         } else {
-            UserService.shared.followUser(uid: user.uid) { (error, ref) in
+            UserService.shared.followUser(uid: user.uid) { (error, _) in
+                if let error = error {
+                    print("DEBUG: Follow user error \(error.localizedDescription)")
+                    return
+                }
                 self.user.isFollowed = true
                 self.user.stats?.followers += 1
                 self.collectionView.reloadData()

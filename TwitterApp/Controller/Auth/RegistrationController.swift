@@ -63,10 +63,10 @@ class RegistrationController: UIViewController {
     private let emailTextField = UI.textField(placeholder: "Email")
 
     private let passwordTextField: UITextField  = {
-        let tf = UI.textField(placeholder: "Password")
-        tf.isSecureTextEntry = true
+        let textField = UI.textField(placeholder: "Password")
+        textField.isSecureTextEntry = true
 
-        return tf
+        return textField
     }()
 
     private let fullnameTextField = UI.textField(placeholder: "Full Name")
@@ -122,7 +122,7 @@ class RegistrationController: UIViewController {
             fullname: fullname,
             username: username,
             imageData: imageData
-        )) { (error, ref) in
+        )) { (error, _) in
             print("User register completion ...")
 
             if let error = error {
@@ -131,11 +131,8 @@ class RegistrationController: UIViewController {
             }
 
             guard
-                let tab = UIApplication.shared.windows
-                    .first(where: {$0.isKeyWindow})?.rootViewController as? MainTabBarController
-            else {
-                return
-            }
+                let tab = UIApplication.shared.getRootViewController() as? MainTabBarController
+            else { return }
 
             tab.authUserAndConfigureUI()
 
@@ -171,7 +168,7 @@ class RegistrationController: UIViewController {
             passwordContainerView,
             fullnameContainerView,
             usernameContainerView,
-            signUpButton,
+            signUpButton
         ])
         stack.axis = .vertical
         stack.spacing = 8
@@ -197,7 +194,7 @@ class RegistrationController: UIViewController {
 // MARK: - UIImagePickerControllerDelegate
 
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
 
         profileImage = image

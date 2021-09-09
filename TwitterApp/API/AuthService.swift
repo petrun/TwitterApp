@@ -31,15 +31,15 @@ struct AuthService {
 
     func registerUser(credentials: AuthCredentials, completion: @escaping (Error?, DatabaseReference) -> Void) {
         let filename = NSUUID().uuidString
-        let storageRef = STORAGE_PROFILE_IMAGES.child(filename)
+        let storageRef = APIReference.profileImages.child(filename)
 
-        storageRef.putData(credentials.imageData, metadata: nil) { (meta, error) in
+        storageRef.putData(credentials.imageData, metadata: nil) { _, error in
             if let error = error {
                 print("DEBUG: error upload image: \(error.localizedDescription)")
                 return
             }
 
-            storageRef.downloadURL { (url, error) in
+            storageRef.downloadURL { url, error in
                 if let error = error {
                     print("DEBUG: error download image: \(error.localizedDescription)")
                     return
@@ -47,7 +47,7 @@ struct AuthService {
 
                 guard let profileImageUrl = url?.absoluteString else { return }
 
-                Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { (result, error) in
+                Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { result, error in
                     if let error = error {
                         print("ERROR: \(error.localizedDescription)")
                         return
@@ -57,12 +57,15 @@ struct AuthService {
 
                     print("UID = \(uid)")
 
-                    REF_USERS.child(uid).updateChildValues([
-                        "email": credentials.email,
-                        "username": credentials.username,
-                        "fullname": credentials.fullname,
-                        "profileImageUrl": profileImageUrl
-                    ], withCompletionBlock: completion)
+                    APIReference.users.child(uid).updateChildValues(
+                        [
+                            "email": credentials.email,
+                            "username": credentials.username,
+                            "fullname": credentials.fullname,
+                            "profileImageUrl": profileImageUrl
+                        ],
+                        withCompletionBlock: completion
+                    )
                 }
             }
         }

@@ -99,7 +99,7 @@ class TweetCell: UICollectionViewCell {
     )
 
     private lazy var actionStack = UI.HStack(
-        arrangedSubviews:  [
+        arrangedSubviews: [
             commentButton,
             retweetButton,
             likeButton,
@@ -145,7 +145,7 @@ class TweetCell: UICollectionViewCell {
 
     // MARK: - Selectors
 
-    //@todo move to TweetActionsStackView
+    // @todo move to TweetActionsStackView
     @objc func handleCommentTapped() {
         delegate?.handleReplyTapped(self)
     }

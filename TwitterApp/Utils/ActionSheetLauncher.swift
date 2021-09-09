@@ -20,7 +20,7 @@ final class ActionSheetLauncher: NSObject {
 
     private let user: User
     private let tableView = UITableView()
-    private lazy var window = UIApplication.shared.windows.first(where: {$0.isKeyWindow})!
+    private lazy var window = UIApplication.shared.windows.first { $0.isKeyWindow }!
     private var tableHeight: CGFloat {
         tableView.rowHeight * CGFloat(options.count) + 100
     }
@@ -130,8 +130,6 @@ extension ActionSheetLauncher: UITableViewDataSource {
 
         return cell
     }
-
-
 }
 
 // MARK: - UITableViewDelegate
@@ -146,7 +144,7 @@ extension ActionSheetLauncher: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let option = self.options[indexPath.row]
+        let option = options[indexPath.row]
 
         UIView.animate(withDuration: 0.3) {
             self.showTableView(false)

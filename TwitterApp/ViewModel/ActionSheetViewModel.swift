@@ -31,7 +31,7 @@ struct ActionSheetViewModel {
             [.delete] :
             [
                 user.isFollowed ? .unfollow(user) : .follow(user),
-                .report,
+                .report
             ]
     }
 

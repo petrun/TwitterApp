@@ -26,7 +26,7 @@ class Constraints {
 }
 
 private class ConstantsCache {
-    var cache = [Int:CGFloat]()
+    var cache = [Int: CGFloat]()
 
     static var shared = ConstantsCache()
 
@@ -42,11 +42,11 @@ private class ConstantsCache {
 }
 
 extension UIView {
-    func addSubview(_ view: UIView, complition: (Constraints) -> Void) {
+    func addSubview(_ view: UIView, completion: (Constraints) -> Void) {
         self.addSubview(view)
 
         let constraints = Constraints()
-        complition(constraints)
+        completion(constraints)
 
         if let height = constraints.height {
             view.height(height)

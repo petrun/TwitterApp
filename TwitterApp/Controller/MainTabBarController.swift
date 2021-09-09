@@ -104,10 +104,10 @@ final class MainTabBarController: UITabBarController {
     }
 
     private func createNavigationController(image: UIImage?, root: UIViewController) -> UINavigationController {
-        let nc = UINavigationController(rootViewController: root)
-        nc.tabBarItem.image = image
-        nc.navigationBar.barTintColor = .white
-        return nc
+        let navigationController = UINavigationController(rootViewController: root)
+        navigationController.tabBarItem.image = image
+        navigationController.navigationBar.barTintColor = .white
+        return navigationController
     }
 
 }

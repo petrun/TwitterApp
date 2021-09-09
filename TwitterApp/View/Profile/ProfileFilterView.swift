@@ -21,15 +21,15 @@ class ProfileFilterView: UIView {
     weak var delegate: ProfileFilterViewDelegate?
 
     lazy var collectionView: UICollectionView = {
-        let cv = UICollectionView(
+        let collectionView = UICollectionView(
             frame: .zero,
             collectionViewLayout: UICollectionViewFlowLayout()
         )
-        cv.backgroundColor = .white
-        cv.delegate = self
-        cv.dataSource = self
+        collectionView.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
 
-        return cv
+        return collectionView
     }()
 
     // MARK: - Lifecycle

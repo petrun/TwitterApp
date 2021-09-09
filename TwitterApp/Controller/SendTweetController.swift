@@ -70,19 +70,19 @@ class SendTweetController: UIViewController {
 
         switch type {
         case .tweet:
-            TweetService.shared.createTweet(caption: caption) { (error, ref) in
+            TweetService.shared.createTweet(caption: caption) { (error, _) in
                 if let error = error {
                     print("DEBUG: Failed to sent tweet with error \(error.localizedDescription)")
-                    return;
+                    return
                 }
 
                 self.dismiss(animated: true)
             }
         case .reply(let tweet):
-            TweetService.shared.reply(to: tweet, caption: caption) { (error, ref) in
+            TweetService.shared.reply(to: tweet, caption: caption) { (error, _) in
                 if let error = error {
                     print("DEBUG: Failed to reply to tweet \(tweet.tweetID) with error \(error.localizedDescription)")
-                    return;
+                    return
                 }
 
                 self.dismiss(animated: true)
@@ -111,10 +111,10 @@ class SendTweetController: UIViewController {
                 arrangedSubviews: [
                     replyLabel,
                     UI.HStack(
-                        arrangedSubviews: [profileImageView,captionTextView],
+                        arrangedSubviews: [profileImageView, captionTextView],
                         spacing: 12,
                         alignment: .leading
-                    ),
+                    )
                 ],
                 spacing: 12
             )

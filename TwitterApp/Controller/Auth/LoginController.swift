@@ -36,10 +36,10 @@ class LoginController: UIViewController {
     private let emailTextField = UI.textField(placeholder: "Email")
 
     private let passwordTextField: UITextField  = {
-        let tf = UI.textField(placeholder: "Password")
-        tf.isSecureTextEntry = true
+        let textField = UI.textField(placeholder: "Password")
+        textField.isSecureTextEntry = true
 
-        return tf
+        return textField
     }()
 
     private let loginButton: UIButton = {
@@ -70,18 +70,15 @@ class LoginController: UIViewController {
             return
         }
 
-        AuthService.shared.login(email: email, password: password) { (result, error) in
+        AuthService.shared.login(email: email, password: password) { (_, error) in
             if let error = error {
                 print("Auth error: \(error.localizedDescription)")
                 return
             }
 
             guard
-                let tab = UIApplication.shared.windows
-                    .first(where: {$0.isKeyWindow})?.rootViewController as? MainTabBarController
-            else {
-                return
-            }
+                let tab = UIApplication.shared.getRootViewController() as? MainTabBarController
+            else { return }
 
             tab.authUserAndConfigureUI()
 
@@ -110,7 +107,7 @@ class LoginController: UIViewController {
         let stack = UIStackView(arrangedSubviews: [
             emailContainerView,
             passwordContainerView,
-            loginButton,
+            loginButton
         ])
         stack.axis = .vertical
         stack.spacing = 8

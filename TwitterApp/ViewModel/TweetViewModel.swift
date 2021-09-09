@@ -48,12 +48,12 @@ struct TweetViewModel {
 
     var userInfoText: NSAttributedString {
         let text = NSMutableAttributedString(string: user.fullname, attributes: [
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)
         ])
 
         text.append(NSAttributedString(string: " @\(user.username) ・ \(timestamp)", attributes: [
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),
-            NSAttributedString.Key.foregroundColor: UIColor.lightGray,
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray
         ]))
 
         return text
@@ -82,7 +82,7 @@ struct TweetViewModel {
 
     // MARK: - Helpers
 
-    func height(forWidth width: CGFloat) ->CGFloat {
+    func height(forWidth width: CGFloat) -> CGFloat {
         let measurementLabel = UILabel()
         measurementLabel.text = tweet.caption
         measurementLabel.numberOfLines = 0
@@ -94,12 +94,12 @@ struct TweetViewModel {
 
     private func attributedText(value: Int, text: String) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: "\(value) ", attributes: [
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14),
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)
         ])
 
         attributedString.append(NSAttributedString(string: text, attributes: [
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
-            NSAttributedString.Key.foregroundColor: UIColor.lightGray,
+            NSAttributedString.Key.foregroundColor: UIColor.lightGray
         ]))
 
         return attributedString
