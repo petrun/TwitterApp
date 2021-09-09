@@ -89,4 +89,44 @@ struct TweetService {
             }
         }
     }
+
+    func like(tweet: Tweet, completion: @escaping(Error?, DatabaseReference) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        let tweetID = tweet.tweetID
+        let tweetLikesRef = REF_TWEETS.child(tweetID).child("likes")
+
+        if tweet.didLike {
+            // unlike
+            //@todo use increment
+            tweetLikesRef.setValue(tweet.likes - 1)
+            REF_USER_LIKES.child(uid).child(tweetID).removeValue { error,ref  in
+                if let error = error {
+                    completion(error, ref)
+                    return;
+                }
+
+                REF_TWEET_LIKES.child(tweetID).child(uid).removeValue(completionBlock: completion)
+            }
+        } else {
+            // like
+            tweetLikesRef.setValue(tweet.likes + 1)
+            REF_USER_LIKES.child(uid).updateChildValues([tweetID: 1]) { error,ref  in
+                if let error = error {
+                    completion(error, ref)
+                    return;
+                }
+
+                REF_TWEET_LIKES.child(tweetID).updateChildValues([uid: 1], withCompletionBlock: completion)
+            }
+        }
+    }
+
+    func checkIfUserLiked(tweet: Tweet, completion: @escaping(Bool) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        REF_USER_LIKES.child(uid).child(tweet.tweetID).observeSingleEvent(of: .value) { snapshot in
+            completion(snapshot.exists())
+        }
+    }
 }

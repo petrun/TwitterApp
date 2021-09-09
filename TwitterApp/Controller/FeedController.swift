@@ -17,6 +17,7 @@ final class FeedController: UICollectionViewController {
         didSet { configureLeftBarButton() }
     }
 
+    //@todo reload item
     private var tweets = [Tweet]() {
         didSet { collectionView.reloadData() }
     }
@@ -40,7 +41,20 @@ final class FeedController: UICollectionViewController {
     // MARK: - API
 
     private func fetchTweets() {
-        TweetService.shared.fetchTweets { self.tweets = $0 }
+        TweetService.shared.fetchTweets {
+            self.tweets = $0
+            self.checkIfUserLiked(tweets: self.tweets)
+        }
+    }
+
+    //@todo move to service
+    private func checkIfUserLiked(tweets: [Tweet]) {
+        for (index, tweet) in tweets.enumerated() {
+            TweetService.shared.checkIfUserLiked(tweet: tweet) {
+                guard $0 == true else { return }
+                self.tweets[index].didLike = $0
+            }
+        }
     }
 
     // MARK: - Helpers
@@ -103,6 +117,19 @@ extension FeedController: UICollectionViewDelegateFlowLayout {
 // MARK: - TweetCellDelegate
 
 extension FeedController: TweetCellDelegate {
+    func handleLikeTapped(_ cell: TweetCell) {
+        guard let tweet = cell.tweet else { return }
+
+        TweetService.shared.like(tweet: tweet) { (error, ref) in
+            if let error = error {
+                print("DEBUG: like error \(error.localizedDescription)")
+                return
+            }
+            cell.tweet?.didLike.toggle()
+            cell.tweet?.likes = tweet.didLike ? tweet.likes - 1 : tweet.likes + 1
+        }
+    }
+
     func handleReplyTapped(_ cell: TweetCell) {
         guard let tweet = cell.tweet else { return }
 

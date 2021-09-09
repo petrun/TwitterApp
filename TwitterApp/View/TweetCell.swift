@@ -10,6 +10,7 @@ import UIKit
 protocol TweetCellDelegate: class {
     func handleProfileImageTapped(_ cell: TweetCell)
     func handleReplyTapped(_ cell: TweetCell)
+    func handleLikeTapped(_ cell: TweetCell)
 }
 
 class TweetCell: UICollectionViewCell {
@@ -24,6 +25,8 @@ class TweetCell: UICollectionViewCell {
             captionLabel.text = viewModel.caption
             profileImageView.sd_setImage(with: viewModel.profileImageUrl)
             infoLabel.attributedText = viewModel.userInfoText
+            likeButton.tintColor = viewModel.likeButtonTintColor
+            likeButton.setImage(viewModel.likeButtonImage, for: .normal)
         }
     }
 
@@ -62,28 +65,28 @@ class TweetCell: UICollectionViewCell {
     }()
 
     private lazy var commentButton: UIButton = {
-        let button = UI.actionButton(image: UIImage(named: "comment"))
+        let button = UI.actionButton(withImageName: "comment")
         button.addTarget(self, action: #selector(handleCommentTapped), for: .touchUpInside)
 
         return button
     }()
 
     private lazy var retweetButton: UIButton = {
-        let button = UI.actionButton(image: UIImage(named: "retweet"))
+        let button = UI.actionButton(withImageName: "retweet")
         button.addTarget(self, action: #selector(handleRetweetTapped), for: .touchUpInside)
 
         return button
     }()
 
     private lazy var likeButton: UIButton = {
-        let button = UI.actionButton(image: UIImage(named: "like"))
+        let button = UI.actionButton(withImageName: "like")
         button.addTarget(self, action: #selector(handleLikeTapped), for: .touchUpInside)
 
         return button
     }()
 
     private lazy var shareButton: UIButton = {
-        let button = UI.actionButton(image: UIImage(named: "share"))
+        let button = UI.actionButton(withImageName: "share")
         button.addTarget(self, action: #selector(handleShareTapped), for: .touchUpInside)
 
         return button
@@ -142,6 +145,7 @@ class TweetCell: UICollectionViewCell {
 
     // MARK: - Selectors
 
+    //@todo move to TweetActionsStackView
     @objc func handleCommentTapped() {
         delegate?.handleReplyTapped(self)
     }
@@ -151,7 +155,7 @@ class TweetCell: UICollectionViewCell {
     }
 
     @objc func handleLikeTapped() {
-        print("Tap button \(#function)")
+        delegate?.handleLikeTapped(self)
     }
 
     @objc func handleShareTapped() {
