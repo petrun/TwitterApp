@@ -27,6 +27,8 @@ class TweetHeader: UICollectionReusableView {
 
             retweetLabel.attributedText = viewModel.retweetsString
             likesLabel.attributedText = viewModel.likesString
+
+            actionButtons.isLiked = tweet.isLiked
         }
     }
 
@@ -142,6 +144,8 @@ class TweetHeader: UICollectionReusableView {
         return view
     }()
 
+    private let actionButtons = TweetActionButtons()
+
     // MARK: - Lifecycle
 
     override init(frame: CGRect) {
@@ -175,7 +179,7 @@ class TweetHeader: UICollectionReusableView {
             $0.height = 40
         }
 
-        addSubview(TweetActionsStackView()) {
+        addSubview(actionButtons) {
             $0.topAnchor = statsView.bottomAnchor
             $0.centerX = self
             $0.bottomAnchor = bottomAnchor + 8

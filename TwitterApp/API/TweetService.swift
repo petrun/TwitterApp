@@ -99,7 +99,7 @@ struct TweetService {
         let tweetID = tweet.tweetID
         let tweetLikesRef = APIReference.tweets.child(tweetID).child("likes")
 
-        if tweet.didLike {
+        if tweet.isLiked {
             // unlike
             // @todo use increment
             tweetLikesRef.setValue(tweet.likes - 1)

@@ -52,7 +52,7 @@ final class FeedController: UICollectionViewController {
         for (index, tweet) in tweets.enumerated() {
             TweetService.shared.checkIfUserLiked(tweet: tweet) {
                 guard $0 == true else { return }
-                self.tweets[index].didLike = $0
+                self.tweets[index].isLiked = $0
             }
         }
     }
@@ -122,15 +122,20 @@ extension FeedController: UICollectionViewDelegateFlowLayout {
 
 extension FeedController: TweetCellDelegate {
     func handleLikeTapped(_ cell: TweetCell) {
-        guard let tweet = cell.tweet else { return }
+        guard var tweet = cell.tweet else { return }
 
         TweetService.shared.like(tweet: tweet) { error, _ in
             if let error = error {
                 print("DEBUG: like error \(error.localizedDescription)")
                 return
             }
-            cell.tweet?.didLike.toggle()
-            cell.tweet?.likes = tweet.didLike ? tweet.likes - 1 : tweet.likes + 1
+
+            tweet.isLiked.toggle()
+            tweet.likes = tweet.isLiked ? tweet.likes + 1 : tweet.likes - 1
+
+            if let index = self.tweets.firstIndex(where: { $0.tweetID == tweet.tweetID }) {
+                self.tweets[index] = tweet
+            }
         }
     }
 

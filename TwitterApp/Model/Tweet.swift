@@ -15,7 +15,7 @@ struct Tweet {
     var likes: Int
     let retweetCount: Int
     let user: User
-    var didLike = false
+    var isLiked = false
 
     init(user: User, tweetID: String, dict: [String: Any]) {
         self.user = user

@@ -7,13 +7,41 @@
 
 import UIKit
 
-final class TweetActionsStackView: UIStackView {
+final class TweetActionButtons: UIStackView {
+    // MARK: - likeButton
+
+    var isLiked = false {
+        didSet {
+            likeButton.setImage(likeButtonImage, for: .normal)
+            likeButton.tintColor = likeButtonTintColor
+        }
+    }
+
+    private var likeButtonImage: UIImage? {
+        UIImage(named: isLiked ? "like_filled" : "like")
+    }
+
+    private var likeButtonTintColor: UIColor {
+        isLiked ? .red : .lightGray
+    }
+
+    private lazy var likeButton: UIButton = {
+        let button = UI.actionButton(image: likeButtonImage, tintColor: likeButtonTintColor)
+        button.addTarget(self, action: #selector(handleLikeTapped), for: .touchUpInside)
+
+        return button
+    }()
+
+    // MARK: - commentButton
+
     private lazy var commentButton: UIButton = {
         let button = UI.actionButton(image: UIImage(named: "comment"))
         button.addTarget(self, action: #selector(handleCommentTapped), for: .touchUpInside)
 
         return button
     }()
+
+    // MARK: - retweetButton
 
     private lazy var retweetButton: UIButton = {
         let button = UI.actionButton(image: UIImage(named: "retweet"))
@@ -22,12 +50,7 @@ final class TweetActionsStackView: UIStackView {
         return button
     }()
 
-    private lazy var likeButton: UIButton = {
-        let button = UI.actionButton(image: UIImage(named: "like"))
-        button.addTarget(self, action: #selector(handleLikeTapped), for: .touchUpInside)
-
-        return button
-    }()
+    // MARK: - shareButton
 
     private lazy var shareButton: UIButton = {
         let button = UI.actionButton(image: UIImage(named: "share"))
