@@ -84,6 +84,8 @@ class SendTweetController: UIViewController {
                     return
                 }
 
+                NotificationService.shared.sendNotification(type: .reply, tweet: tweet)
+
                 self.dismiss(animated: true)
             }
         }

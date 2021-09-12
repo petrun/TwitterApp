@@ -133,8 +133,12 @@ extension FeedController: TweetCellDelegate {
             tweet.isLiked.toggle()
             tweet.likes = tweet.isLiked ? tweet.likes + 1 : tweet.likes - 1
 
-            if let index = self.tweets.firstIndex(where: { $0.tweetID == tweet.tweetID }) {
-                self.tweets[index] = tweet
+            guard let index = self.tweets.firstIndex(where: { $0.tweetID == tweet.tweetID }) else { return }
+
+            self.tweets[index] = tweet
+
+            if tweet.isLiked {
+                NotificationService.shared.sendNotification(type: .like, tweet: tweet)
             }
         }
     }

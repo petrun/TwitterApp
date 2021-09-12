@@ -10,7 +10,7 @@ import UIKit
 final class TweetActionButtons: UIStackView {
     // MARK: - likeButton
 
-    var isLiked = false {
+    lazy var isLiked = false {
         didSet {
             likeButton.setImage(likeButtonImage, for: .normal)
             likeButton.tintColor = likeButtonTintColor

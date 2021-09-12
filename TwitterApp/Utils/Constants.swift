@@ -22,4 +22,6 @@ enum APIReference {
     static let tweets = database.child("tweets")
     static let tweetReplies = database.child("tweet_replies")
     static let tweetLikes = database.child("tweet_likes")
+
+    static let notifications = database.child("notifications")
 }
