@@ -11,6 +11,7 @@ protocol ProfileHeaderDelegate: class {
     func handleDismissal()
     func handleEditProfile(_ header: ProfileHeader)
     func handleFollow(_ header: ProfileHeader)
+    func handleSelect(filter: ProfileFilterOptions)
 }
 
 class ProfileHeader: UICollectionReusableView {
@@ -116,13 +117,6 @@ This is a user bio what will span more than one line for test purposes
 
     private let filterBar = ProfileFilterView()
 
-    private let underlineView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .twitterBlue
-
-        return view
-    }()
-
     private let followingLabel: UILabel = {
         let label = UILabel()
 
@@ -156,8 +150,7 @@ This is a user bio what will span more than one line for test purposes
             containerView,
             profileImageView,
             editProfileFollowButton,
-            filterBar,
-            underlineView
+            filterBar
         ].forEach { addSubview($0) }
 
         containerView
@@ -210,12 +203,6 @@ This is a user bio what will span more than one line for test purposes
             .right(to: rightAnchor)
             .bottom(to: bottomAnchor)
             .height(50)
-
-        underlineView
-            .left(to: leftAnchor)
-            .bottom(to: bottomAnchor)
-            .width(frame.width / CGFloat(filterBar.options.count))
-            .height(2)
     }
 
     required init?(coder: NSCoder) {
@@ -248,12 +235,7 @@ This is a user bio what will span more than one line for test purposes
 // MARK: - ProfileFilterViewDelegate
 
 extension ProfileHeader: ProfileFilterViewDelegate {
-    func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath) {
-        guard let cell = view.collectionView.cellForItem(at: indexPath) as? ProfileFilterCell else { return }
-
-        let xPosition = cell.frame.origin.x
-        UIView.animate(withDuration: 0.3) {
-            self.underlineView.frame.origin.x = xPosition
-        }
+    func selectFilter(_ filter: ProfileFilterOptions) {
+        delegate?.handleSelect(filter: filter)
     }
 }

@@ -38,21 +38,33 @@ final class FeedController: UICollectionViewController {
         navigationController?.navigationBar.barStyle = .default
     }
 
+    // MARK: - Selectors
+
+    @objc func handleRefresh() {
+        fetchTweets()
+    }
+
     // MARK: - API
 
     private func fetchTweets() {
-        TweetService.shared.fetchTweets {
-            self.tweets = $0
+        collectionView.refreshControl?.beginRefreshing()
+        TweetService.shared.fetchFollowingTweets { tweets in
+            self.collectionView.refreshControl?.endRefreshing()
+            self.tweets = tweets.sorted(by: { $0.timestamp > $1.timestamp })
             self.checkIfUserLiked(tweets: self.tweets)
         }
     }
 
     // @todo move to service
     private func checkIfUserLiked(tweets: [Tweet]) {
-        for (index, tweet) in tweets.enumerated() {
-            TweetService.shared.checkIfUserLiked(tweet: tweet) {
-                guard $0 == true else { return }
-                self.tweets[index].isLiked = $0
+        tweets.forEach { tweet in
+            TweetService.shared.checkIfUserLiked(tweet: tweet) { isLiked in
+                guard
+                    isLiked == true,
+                    let index = self.tweets.firstIndex(where:{ $0.tweetID == tweet.tweetID })
+                else { return }
+
+                self.tweets[index].isLiked = isLiked
             }
         }
     }
@@ -68,6 +80,10 @@ final class FeedController: UICollectionViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.size(width: 44, height: 44)
         navigationItem.titleView = imageView
+
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
     }
 
     private func configureLeftBarButton() {

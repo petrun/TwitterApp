@@ -8,6 +8,8 @@
 import UIKit
 
 struct TweetViewModel {
+    // MARK: - Properties
+
     private let tweet: Tweet
     private let user: User
 
@@ -75,6 +77,18 @@ struct TweetViewModel {
         UIImage(named: tweet.isLiked ? "like_filled" : "like")!
     }
 
+    var shouldHideReplyLabel: Bool {
+        !tweet.isReply
+    }
+
+    var replyText: String? {
+        guard let replyingTo = tweet.replyingTo else { return nil }
+
+        return "→ replaying to @\(replyingTo)"
+    }
+
+    // MARK: - Lifecycle
+
     init(tweet: Tweet) {
         self.tweet = tweet
         user = tweet.user
@@ -89,7 +103,9 @@ struct TweetViewModel {
         measurementLabel.lineBreakMode = .byWordWrapping
         measurementLabel.width(width)
 
-        return measurementLabel.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+        return
+            measurementLabel.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+            + (shouldHideReplyLabel ? 0 : 20)
     }
 
     private func attributedText(value: Int, text: String) -> NSAttributedString {

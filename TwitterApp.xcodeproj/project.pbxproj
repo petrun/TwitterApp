@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2DC1801AB0FCB61D9C4275CE /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC18A1486C36A4E5BC65BBC /* NotificationViewModel.swift */; };
 		2DC1835F8066D08FB3523431 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC18AE21888BDF9B923ABB1 /* NotificationService.swift */; };
+		2DC188A3A1A31B38884AD103 /* TODO.md in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1852C42E9A2CDFED2FF50 /* TODO.md */; };
 		2DC1894700D8D17B03053E39 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC18CE3826FAC646C8E740C /* Notification.swift */; };
 		2DC18FB5FAFF718945CE386F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC18680F4E6C14491688E30 /* NotificationCell.swift */; };
 		A101CC2A26D6EEAF00DA9534 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A101CC2926D6EEAF00DA9534 /* ProfileHeader.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2DC1852C42E9A2CDFED2FF50 /* TODO.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = "<group>"; };
 		2DC18680F4E6C14491688E30 /* NotificationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		2DC18A1486C36A4E5BC65BBC /* NotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		2DC18AE21888BDF9B923ABB1 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				A13D512626CEAC5A000393AE /* GoogleService-Info.plist */,
 				A11FB52B26C9D06100A2E55E /* Info.plist */,
 				A181939A26EA70F7008A68CF /* .swiftlint.yml */,
+				2DC1852C42E9A2CDFED2FF50 /* TODO.md */,
 			);
 			path = TwitterApp;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				2DC1835F8066D08FB3523431 /* NotificationService.swift in Sources */,
 				2DC18FB5FAFF718945CE386F /* NotificationCell.swift in Sources */,
 				2DC1801AB0FCB61D9C4275CE /* NotificationViewModel.swift in Sources */,
+				2DC188A3A1A31B38884AD103 /* TODO.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

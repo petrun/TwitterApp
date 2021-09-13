@@ -29,6 +29,9 @@ class TweetHeader: UICollectionReusableView {
             likesLabel.attributedText = viewModel.likesString
 
             actionButtons.isLiked = tweet.isLiked
+
+            replyLabel.isHidden = viewModel.shouldHideReplyLabel
+            replyLabel.text = viewModel.replyText
         }
     }
 
@@ -42,6 +45,14 @@ class TweetHeader: UICollectionReusableView {
         imageView.isUserInteractionEnabled = true
 
         return imageView
+    }()
+
+    private let replyLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .lightGray
+        label.font = .systemFont(ofSize: 12)
+
+        return label
     }()
 
     private let fullnameLabel: UILabel = {
@@ -144,6 +155,16 @@ class TweetHeader: UICollectionReusableView {
         return view
     }()
 
+    private lazy var mainStack = UI.VStack(
+        arrangedSubviews: [
+            replyLabel,
+            userInfoStack
+        ],
+        spacing: 8,
+        distribution: .fillProportionally,
+        alignment: .leading
+    )
+
     private let actionButtons = TweetActionButtons()
 
     // MARK: - Lifecycle
@@ -151,13 +172,13 @@ class TweetHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        addSubview(userInfoStack) {
+        addSubview(mainStack) {
             $0.top = 16
             $0.left = 16
         }
 
         addSubview(captionLabel) {
-            $0.topAnchor = userInfoStack.bottomAnchor + 20
+            $0.topAnchor = mainStack.bottomAnchor + 20
             $0.left = 16
             $0.right = 16
         }

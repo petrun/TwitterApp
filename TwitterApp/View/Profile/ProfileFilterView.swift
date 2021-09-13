@@ -10,13 +10,13 @@ import UIKit
 private let reuseIdentifier = "ProfileFilterCell"
 
 protocol ProfileFilterViewDelegate: class {
-    func filterView(_ view: ProfileFilterView, didSelect indexPath: IndexPath)
+    func selectFilter(_ filter: ProfileFilterOptions)
 }
 
 class ProfileFilterView: UIView {
     // MARK: - Properties
 
-    let options = ProfileFilterOptions.allCases
+    let filters = ProfileFilterOptions.allCases
 
     weak var delegate: ProfileFilterViewDelegate?
 
@@ -30,6 +30,13 @@ class ProfileFilterView: UIView {
         collectionView.dataSource = self
 
         return collectionView
+    }()
+
+    private let underlineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .twitterBlue
+
+        return view
     }()
 
     // MARK: - Lifecycle
@@ -49,6 +56,15 @@ class ProfileFilterView: UIView {
         collectionView.fill(view: self)
     }
 
+    override func layoutSubviews() {
+        addSubview(underlineView)
+        underlineView
+            .left(to: leftAnchor)
+            .bottom(to: bottomAnchor)
+            .width(frame.width / CGFloat(filters.count))
+            .height(2)
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -58,7 +74,7 @@ class ProfileFilterView: UIView {
 
 extension ProfileFilterView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        options.count
+        filters.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,7 +83,7 @@ extension ProfileFilterView: UICollectionViewDataSource {
             for: indexPath
         ) as! ProfileFilterCell
 
-        cell.titleLabel.text = options[indexPath.row].description
+        cell.titleLabel.text = filters[indexPath.row].description
 
         return cell
     }
@@ -77,7 +93,14 @@ extension ProfileFilterView: UICollectionViewDataSource {
 
 extension ProfileFilterView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.filterView(self, didSelect: indexPath)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? ProfileFilterCell else { return }
+
+        let xPosition = cell.frame.origin.x
+        UIView.animate(withDuration: 0.3) {
+            self.underlineView.frame.origin.x = xPosition
+        }
+
+        delegate?.selectFilter(filters[indexPath.row])
     }
 }
 
@@ -85,10 +108,7 @@ extension ProfileFilterView: UICollectionViewDelegate {
 
 extension ProfileFilterView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(
-            width: frame.width / CGFloat(options.count),
-            height: frame.height
-        )
+        CGSize(width: frame.width / CGFloat(filters.count), height: frame.height)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

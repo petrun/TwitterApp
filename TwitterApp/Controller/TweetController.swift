@@ -38,6 +38,13 @@ class TweetController: UICollectionViewController {
         fetchReplies()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.barStyle = .default
+    }
+
     func configureCollectionView() {
         collectionView.backgroundColor = .white
 
@@ -52,7 +59,7 @@ class TweetController: UICollectionViewController {
     // MARK: - API
 
     func fetchReplies() {
-        TweetService.shared.fetchReplies(for: tweet) { replies in
+        TweetService.shared.fetchReplies(forTweet: tweet) { replies in
             self.replies = replies
         }
     }

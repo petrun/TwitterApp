@@ -15,8 +15,20 @@ class ProfileController: UICollectionViewController {
 
     private var user: User
 
-    private var tweets: [Tweet] = [] {
+    private var selectedFilter: ProfileFilterOptions = .tweets {
         didSet { collectionView.reloadData() }
+    }
+
+    private var tweets: [Tweet] = []
+    private var replies: [Tweet] = []
+    private var likedTweets: [Tweet] = []
+
+    private var currentDataSource: [Tweet] {
+        switch selectedFilter {
+        case .tweets: return tweets
+        case .replies: return replies
+        case .likes: return likedTweets
+        }
     }
 
     // MARK: - Lifecycle
@@ -38,6 +50,9 @@ class ProfileController: UICollectionViewController {
         fetchTweets()
         checkIfUserIsFollowed()
         fetchUserStats()
+
+        fetchLikedTweets()
+        fetchReplies()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -50,9 +65,18 @@ class ProfileController: UICollectionViewController {
     // MARK: - API
 
     private func fetchTweets() {
-        TweetService.shared.fetchTweets(forUser: user) { tweets in
-            self.tweets = tweets
+        TweetService.shared.fetchTweets(forUser: user) {
+            self.tweets = $0
+            self.collectionView.reloadData()
         }
+    }
+
+    private func fetchLikedTweets() {
+        TweetService.shared.fetchLikes(forUser: user) { self.likedTweets = $0 }
+    }
+
+    private func fetchReplies() {
+        TweetService.shared.fetchReplies(forUser: user) { self.replies = $0  }
     }
 
     private func checkIfUserIsFollowed() {
@@ -81,6 +105,10 @@ class ProfileController: UICollectionViewController {
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: headerReuseIdentifier
         )
+
+        if let tabHeight = tabBarController?.tabBar.frame.height {
+            collectionView.contentInset.bottom = tabHeight
+        }
     }
 }
 
@@ -88,7 +116,7 @@ class ProfileController: UICollectionViewController {
 
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        tweets.count
+        currentDataSource.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -97,7 +125,7 @@ extension ProfileController {
             for: indexPath
         ) as! TweetCell
 
-        cell.tweet = tweets[indexPath.row]
+        cell.tweet = currentDataSource[indexPath.row]
 
         return cell
     }
@@ -113,12 +141,12 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(
             width: view.frame.width,
-            height: TweetViewModel(tweet: tweets[indexPath.row]).height(forWidth: view.frame.width) + 72
+            height: TweetViewModel(tweet: currentDataSource[indexPath.row]).height(forWidth: view.frame.width) + 72
         )
     }
 }
 
-// MARK: - UICollectionViewDelegate
+// MARK: - UICollectionViewDelegate/DataSource
 
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -133,11 +161,24 @@ extension ProfileController {
 
         return profileHeader
     }
+
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        guard selectedFilter == .tweets else { return }
+
+        navigationController?.pushViewController(
+            TweetController(tweet: currentDataSource[indexPath.row]),
+            animated: true
+        )
+    }
 }
 
 // MARK: - ProfileHeaderDelegate
 
 extension ProfileController: ProfileHeaderDelegate {
+    func handleSelect(filter: ProfileFilterOptions) {
+        selectedFilter = filter
+    }
+
     func handleEditProfile(_ header: ProfileHeader) {
         print("DEBUG: Call edit profile")
     }
