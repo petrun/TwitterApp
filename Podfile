@@ -8,6 +8,7 @@ target 'TwitterApp' do
   inhibit_all_warnings!
 
   # Pods for TwitterApp
+  pod 'ActiveLabel'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
   pod 'Firebase/Auth'

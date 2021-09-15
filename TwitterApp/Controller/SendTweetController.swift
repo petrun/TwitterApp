@@ -5,6 +5,7 @@
 //  Created by andy on 21.08.2021.
 //
 
+import ActiveLabel
 import UIKit
 
 class SendTweetController: UIViewController {
@@ -28,10 +29,12 @@ class SendTweetController: UIViewController {
 
     private let profileImageView = UI.roundImageView(size: 48)
 
-    private let replyLabel: UILabel = {
-        let label = UILabel()
+    private let replyLabel: ActiveLabel = {
+        let label = ActiveLabel()
         label.font = .systemFont(ofSize: 14)
         label.textColor = .lightGray
+        label.enabledTypes = [.mention]
+        label.mentionColor = .twitterBlue
 
         return label
     }()
@@ -61,6 +64,13 @@ class SendTweetController: UIViewController {
 
         configureNavigationBar()
         configureUI()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.barStyle = .default
     }
 
     // MARK: - Selectors
@@ -131,6 +141,13 @@ class SendTweetController: UIViewController {
         }
 
         profileImageView.sd_setImage(with: user.profileImageUrl)
+
+        replyLabel.handleMentionTap { _ in
+            self.navigationController?.pushViewController(
+                ProfileController(user: self.user),
+                animated: true
+            )
+        }
     }
 
     private func configureNavigationBar() {
