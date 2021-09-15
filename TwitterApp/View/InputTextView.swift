@@ -7,14 +7,13 @@
 
 import UIKit
 
-class CaptionTextView: UITextView {
+class InputTextView: UITextView {
     // MARK: - Properties
 
     let placeholderLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16)
         label.textColor = .darkGray
-        label.text = "What's happening?"
 
         return label
     }()
@@ -26,12 +25,13 @@ class CaptionTextView: UITextView {
 
         font = .systemFont(ofSize: 16)
         isScrollEnabled = true
-        height(300)
 
         addSubview(placeholderLabel)
         placeholderLabel
             .top(to: topAnchor, 8)
             .left(to: leftAnchor, 4)
+
+        placeholderLabel.isHidden = !text.isEmpty
 
         NotificationCenter.default.addObserver(
             self,

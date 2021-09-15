@@ -21,7 +21,9 @@ struct Tweet {
     init(user: User, tweetID: String, dict: [String: Any]) {
         self.user = user
         self.tweetID = tweetID
-        self.replyingTo = dict["replyingTo"] as? String ?? nil
+        if let replyingTo = dict["replyingTo"] as? String {
+            self.replyingTo = replyingTo
+        }
 
         caption = dict["caption"] as? String ?? ""
         likes = dict["likes"] as? Int ?? 0

@@ -76,7 +76,7 @@ class ProfileController: UICollectionViewController {
     }
 
     private func fetchReplies() {
-        TweetService.shared.fetchReplies(forUser: user) { self.replies = $0  }
+        TweetService.shared.fetchReplies(forUser: user) { self.replies = $0 }
     }
 
     private func checkIfUserIsFollowed() {
@@ -180,7 +180,11 @@ extension ProfileController: ProfileHeaderDelegate {
     }
 
     func handleEditProfile(_ header: ProfileHeader) {
-        print("DEBUG: Call edit profile")
+        let editProfileController = EditProfileController(user: user)
+        editProfileController.delegate = self
+        let nav = UINavigationController(rootViewController: editProfileController)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true)
     }
 
     func handleFollow(_ header: ProfileHeader) {
@@ -211,5 +215,15 @@ extension ProfileController: ProfileHeaderDelegate {
 
     func handleDismissal() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+// MARK: - EditProfileControllerDelegate
+
+extension ProfileController: EditProfileControllerDelegate {
+    func controller(_ controller: EditProfileController, wantsToUpdate user: User) {
+        controller.dismiss(animated: true)
+        self.user = user
+        collectionView.reloadData()
     }
 }

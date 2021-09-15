@@ -16,6 +16,12 @@ struct AuthCredentials {
     let imageData: Data
 }
 
+struct UpdateUserCredentials {
+    let fullname: String
+    let username: String
+    let bio: String
+}
+
 struct AuthService {
     static let shared = AuthService()
 

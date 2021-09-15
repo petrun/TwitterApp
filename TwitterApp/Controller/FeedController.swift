@@ -50,7 +50,7 @@ final class FeedController: UICollectionViewController {
         collectionView.refreshControl?.beginRefreshing()
         TweetService.shared.fetchFollowingTweets { tweets in
             self.collectionView.refreshControl?.endRefreshing()
-            self.tweets = tweets.sorted(by: { $0.timestamp > $1.timestamp })
+            self.tweets = tweets.sorted { $0.timestamp > $1.timestamp }
             self.checkIfUserLiked(tweets: self.tweets)
         }
     }
@@ -61,7 +61,7 @@ final class FeedController: UICollectionViewController {
             TweetService.shared.checkIfUserLiked(tweet: tweet) { isLiked in
                 guard
                     isLiked == true,
-                    let index = self.tweets.firstIndex(where:{ $0.tweetID == tweet.tweetID })
+                    let index = self.tweets.firstIndex(where: { $0.tweetID == tweet.tweetID })
                 else { return }
 
                 self.tweets[index].isLiked = isLiked

@@ -10,9 +10,10 @@ import Foundation
 struct User {
     let uid: String
     let email: String
-    let fullname: String
+    var fullname: String
     var profileImageUrl: URL?
-    let username: String
+    var username: String
+    var bio: String
     var isCurrentUser: Bool { AuthService.shared.currentUserId == uid }
     var isFollowed = false
     var stats: UserRelationStats?
@@ -23,6 +24,7 @@ struct User {
         email = dict["email"] as? String ?? ""
         fullname = dict["fullname"] as? String ?? ""
         username = dict["username"] as? String ?? ""
+        bio = dict["bio"] as? String ?? ""
 
         if
             let profileImageUrlString = dict["profileImageUrl"] as? String,

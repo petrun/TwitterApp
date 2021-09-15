@@ -74,4 +74,47 @@ struct UserService {
             }
         }
     }
+
+    func updateUserData(credentials: UpdateUserCredentials, completion: @escaping (Error?, DatabaseReference) -> Void) {
+        guard let uid = AuthService.shared.currentUserId else { return }
+
+        APIReference.users.child(uid).updateChildValues(
+            [
+                "fullname": credentials.fullname,
+                "username": credentials.username,
+                "bio": credentials.bio
+            ],
+            withCompletionBlock: completion
+        )
+    }
+
+    func updateProfileImage(image: UIImage, completion: @escaping (URL) -> Void) {
+        guard let imageData = image.jpegData(compressionQuality: 0.3) else { return }
+        guard let uid = AuthService.shared.currentUserId else { return }
+
+        let filename = NSUUID().uuidString
+        let ref = APIReference.profileImages.child(filename)
+
+        ref.putData(imageData, metadata: nil) { _, error in
+            if let error = error {
+                print("ERROR: \(error.localizedDescription)")
+                return
+            }
+            ref.downloadURL { url, error in
+                if let error = error {
+                    print("ERROR: \(error.localizedDescription)")
+                    return
+                }
+                guard let url = url else { return }
+
+                APIReference.users.child(uid).updateChildValues(["profileImageUrl": url.absoluteString]) { error, _ in
+                    if let error = error {
+                        print("ERROR: \(error.localizedDescription)")
+                        return
+                    }
+                    completion(url)
+                }
+            }
+        }
+    }
 }

@@ -36,7 +36,12 @@ class SendTweetController: UIViewController {
         return label
     }()
 
-    private let captionTextView = CaptionTextView()
+    private let captionTextView: InputTextView = {
+        let textView = InputTextView()
+        textView.height(300)
+
+        return textView
+    }()
 
     // MARK: - Lifecycle
 
