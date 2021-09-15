@@ -1,7 +1,5 @@
 excluded:
-  - ${PWD}/Carthage
   - ${PWD}/Pods
-  - ${PWD}/DerivedData
 
 disabled_rules:
   - discarded_notification_center_observer
