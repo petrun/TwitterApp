@@ -28,6 +28,15 @@ class EditProfileController: UIViewController {
         didSet { headerView.profileImageView.image = selectedImage }
     }
 
+    private lazy var logoutButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Logout", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
+
+        return button
+    }()
+
     weak var delegate: EditProfileControllerDelegate?
 
     // MARK: - Lifecycle
@@ -60,6 +69,20 @@ class EditProfileController: UIViewController {
         guard selectedImage != nil || userInfoChanged else { return }
 
         updateUserData()
+    }
+
+    @objc func handleLogout() {
+        let alert = UIAlertController(
+            title: "Are you sure you want to logout?", message: nil, preferredStyle: .actionSheet
+        )
+        alert.addAction(UIAlertAction(title: "Logout", style: .destructive) { _ in
+            AuthService.shared.logout {
+                // @todo set window key controller = mainController
+            }
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        present(alert, animated: true)
     }
 
     // MARK: - API
@@ -138,6 +161,11 @@ class EditProfileController: UIViewController {
             $0.topAnchor = headerView.bottomAnchor
             $0.left = 0
             $0.right = 0
+        }
+
+        view.addSubview(logoutButton) {
+            $0.bottom = 50
+            $0.centerX = view
         }
     }
 

@@ -99,7 +99,7 @@ class SendTweetController: UIViewController {
                     return
                 }
 
-                NotificationService.shared.sendNotification(type: .reply, tweet: tweet)
+                NotificationService.shared.sendNotification(type: .reply, toUser: tweet.user, tweetId: tweet.tweetID)
 
                 self.dismiss(animated: true)
             }
@@ -144,7 +144,7 @@ class SendTweetController: UIViewController {
 
         replyLabel.handleMentionTap { _ in
             self.navigationController?.pushViewController(
-                ProfileController(user: self.user),
+                ViewControllerFactory.shared.makeProfileViewController(user: self.user),
                 animated: true
             )
         }

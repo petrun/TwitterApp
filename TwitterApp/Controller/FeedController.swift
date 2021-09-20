@@ -44,6 +44,15 @@ final class FeedController: UICollectionViewController {
         fetchTweets()
     }
 
+    @objc func handleProfileImageTap() {
+        guard let user = user else { return }
+
+        navigationController?.pushViewController(
+            ViewControllerFactory.shared.makeProfileViewController(user: user),
+            animated: true
+        )
+    }
+
     // MARK: - API
 
     private func fetchTweets() {
@@ -93,6 +102,10 @@ final class FeedController: UICollectionViewController {
         profileImageView.sd_setImage(with: user.profileImageUrl)
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: profileImageView)
+
+        navigationItem.leftBarButtonItem?.customView?.addGestureRecognizer(
+            UITapGestureRecognizer(target: self, action: #selector(handleProfileImageTap))
+        )
     }
 }
 
@@ -154,7 +167,7 @@ extension FeedController: TweetCellDelegate {
             self.tweets[index] = tweet
 
             if tweet.isLiked {
-                NotificationService.shared.sendNotification(type: .like, tweet: tweet)
+                NotificationService.shared.sendNotification(type: .like, toUser: tweet.user, tweetId: tweet.tweetID)
             }
         }
     }
@@ -173,7 +186,7 @@ extension FeedController: TweetCellDelegate {
         guard let user = cell.tweet?.user else { return }
 
         navigationController?.pushViewController(
-            ProfileController(user: user),
+            ViewControllerFactory.shared.makeProfileViewController(user: user),
             animated: true
         )
     }

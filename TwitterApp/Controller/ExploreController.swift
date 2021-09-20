@@ -90,7 +90,7 @@ extension ExploreController {
         let user = inSearchMode ? filteredUsers[indexPath.row] : users[indexPath.row]
 
         navigationController?.pushViewController(
-            ProfileController(user: user),
+            ViewControllerFactory.shared.makeProfileViewController(user: user),
             animated: true
         )
     }

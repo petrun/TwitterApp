@@ -9,7 +9,11 @@ struct NotificationService {
 
     private init() {}
 
-    func sendNotification(type: NotificationType, tweet: Tweet? = nil, user: User? = nil) {
+    func sendNotification(
+        type: NotificationType,
+        toUser user: User,
+        tweetId: String? = nil
+    ) {
         guard let uid = AuthService.shared.currentUserId else { return }
 
         var values: [String: Any] = [
@@ -18,13 +22,11 @@ struct NotificationService {
             "type": type.rawValue
         ]
 
-        if let tweet = tweet {
-            values["tweetID"] = tweet.tweetID
-
-            APIReference.notifications.child(tweet.user.uid).childByAutoId().updateChildValues(values)
-        } else if let user = user {
-            APIReference.notifications.child(user.uid).childByAutoId().updateChildValues(values)
+        if let tweetId = tweetId {
+            values["tweetID"] = tweetId
         }
+
+        APIReference.notifications.child(user.uid).childByAutoId().updateChildValues(values)
     }
 
     func fetchNotifications(completion: @escaping([Notification]) -> Void) {
@@ -32,13 +34,17 @@ struct NotificationService {
 
         var notifications: [Notification] = []
 
-        APIReference.notifications.child(uid).observe(.childAdded) { snapshot in
-            guard let dict = snapshot.value as? [String: Any] else { return }
-            guard let uid = dict["uid"] as? String else { return }
+        APIReference.notifications.child(uid).observeSingleEvent(of: .value) { snapshot in
+            guard snapshot.exists() else { completion(notifications); return }
 
-            UserService.shared.fetchUser(uid: uid) { user in
-                notifications.append(Notification(user: user, dict: dict))
-                completion(notifications)
+            APIReference.notifications.child(uid).observe(.childAdded) { snapshot in
+                guard let dict = snapshot.value as? [String: Any] else { return }
+                guard let uid = dict["uid"] as? String else { return }
+
+                UserService.shared.fetchUser(uid: uid) { user in
+                    notifications.append(Notification(user: user, dict: dict))
+                    completion(notifications)
+                }
             }
         }
     }

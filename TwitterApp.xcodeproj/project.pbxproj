@@ -14,6 +14,7 @@
 		2DC188A3A1A31B38884AD103 /* TODO.md in Sources */ = {isa = PBXBuildFile; fileRef = 2DC1852C42E9A2CDFED2FF50 /* TODO.md */; };
 		2DC188D3C0AFE31E1DC09244 /* EditProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC18774BDE62BE4BEE1F23C /* EditProfileController.swift */; };
 		2DC1894700D8D17B03053E39 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC18CE3826FAC646C8E740C /* Notification.swift */; };
+		2DC1899BB1CA8989929C991C /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC18B31020258B005769FB1 /* ViewControllerFactory.swift */; };
 		2DC18AF3F777FC5F672FB279 /* EditProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC188798781CB92DADFB87C /* EditProfileHeader.swift */; };
 		2DC18EFC8E0ACD5AC920B811 /* EditProfileFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC186CF10029A4642856C0D /* EditProfileFieldView.swift */; };
 		2DC18FB5FAFF718945CE386F /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC18680F4E6C14491688E30 /* NotificationCell.swift */; };
@@ -71,6 +72,7 @@
 		2DC188798781CB92DADFB87C /* EditProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileHeader.swift; sourceTree = "<group>"; };
 		2DC18A1486C36A4E5BC65BBC /* NotificationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		2DC18AE21888BDF9B923ABB1 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		2DC18B31020258B005769FB1 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		2DC18C71C067042A94A1B852 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		2DC18CE3826FAC646C8E740C /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		2DC18F2FA327D8FFA5F5400E /* EditProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				A13D512626CEAC5A000393AE /* GoogleService-Info.plist */,
 				A11FB52B26C9D06100A2E55E /* Info.plist */,
 				2DC1852C42E9A2CDFED2FF50 /* TODO.md */,
+				2DC18B31020258B005769FB1 /* ViewControllerFactory.swift */,
 			);
 			path = TwitterApp;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				2DC1807A8D09DCC232EEC8CD /* EditProfileViewModel.swift in Sources */,
 				2DC188D3C0AFE31E1DC09244 /* EditProfileController.swift in Sources */,
 				2DC18EFC8E0ACD5AC920B811 /* EditProfileFieldView.swift in Sources */,
+				2DC1899BB1CA8989929C991C /* ViewControllerFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -76,4 +76,13 @@ struct AuthService {
             }
         }
     }
+
+    func logout(completion: @escaping () -> Void) {
+        do {
+            try Auth.auth().signOut()
+            completion()
+        } catch {
+            print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
+        }
+    }
 }

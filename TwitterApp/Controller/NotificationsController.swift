@@ -47,10 +47,13 @@ final class NotificationsController: UITableViewController {
 
             self.notifications = $0
 
-            for (index, notification) in self.notifications.enumerated() {
-                guard notification.type == .follow else { continue }
+            self.notifications.forEach { notification in
+                guard notification.type == .follow else { return }
 
                 UserService.shared.checkIfUserIsFollowed(uid: notification.user.uid) {
+                    guard let index = self.notifications.firstIndex(where: {
+                        $0.type == notification.type && $0.user.uid == notification.user.uid
+                    }) else { return }
                     self.notifications[index].user.isFollowed = $0
                 }
             }
@@ -111,7 +114,7 @@ extension NotificationsController: NotificationCellDelegate {
         guard let user = cell.notification?.user else { return }
 
         navigationController?.pushViewController(
-            ProfileController(user: user),
+            ViewControllerFactory.shared.makeProfileViewController(user: user),
             animated: true
         )
     }
