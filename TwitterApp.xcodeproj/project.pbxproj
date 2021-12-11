@@ -122,6 +122,7 @@
 		A18ADDAB26D2527A00F0B782 /* RemoteStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteStorage.swift; sourceTree = "<group>"; };
 		A18ADDAE26D252A500F0B782 /* RemoteAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuth.swift; sourceTree = "<group>"; };
 		A196013526E3DF310059DC60 /* UIButton+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+extension.swift"; sourceTree = "<group>"; };
+		A19AC2152764FCDD00D6D846 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B3533F5A880B68E499F394AE /* Pods_TwitterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwitterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF3C89704F29A4BC04FD1C9 /* Pods-TwitterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterApp.debug.xcconfig"; path = "Target Support Files/Pods-TwitterApp/Pods-TwitterApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -291,6 +292,7 @@
 		A11FB51126C9D06000A2E55E = {
 			isa = PBXGroup;
 			children = (
+				A19AC2152764FCDD00D6D846 /* README.md */,
 				A11FB51C26C9D06000A2E55E /* TwitterApp */,
 				A11FB51B26C9D06000A2E55E /* Products */,
 				5E5BB904D7F4ED88D199E3B4 /* Pods */,
